@@ -2,7 +2,11 @@
 alias ..='cd ..'
 
 # ls
-alias ls="ls -GF --color=auto"
+if [[ `uname` == 'Linux' ]]; then
+  alias ls="ls -F --color=auto"
+else
+  alias ls="ls -GF"
+fi
 alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
