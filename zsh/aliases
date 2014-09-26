@@ -12,6 +12,8 @@ alias ll="ls -l"
 alias la='ls -A'
 
 # git
+alias gf='git fetch -v'
+alias gfu='git fetch upstream -v'
 alias gl='git pull --rebase --stat'
 alias ga='git add'
 alias gp='git push'
