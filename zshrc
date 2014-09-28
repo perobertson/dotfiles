@@ -45,5 +45,12 @@ source $ZSH/oh-my-zsh.sh
 # Load boxen configuration
 [[ -f ~/opt/boxen/env.sh ]] && . /opt/boxen/env.sh
 
+# Load project configurations
+if [[ -d ~/.projects ]]; then
+  for file in ~/.projects/*; do
+    [[ -f $file ]] && . $file
+  done
+fi
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
