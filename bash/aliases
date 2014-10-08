@@ -1,7 +1,7 @@
 . ~/.zsh/aliases
 
 # changing directory to project
-function ws { cd ~/development/workspace/$1*; }
+function ws { cd ~/workspace/$1*; }
 
 # misc
 alias reload='. ~/.bash_profile'
