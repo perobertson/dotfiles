@@ -1,1 +1,1 @@
-cd ~/code/$1;
+cd "${CODE_PATH}/${1}";
