@@ -42,6 +42,9 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh/aliases
 . ~/.zsh/completion
 
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
 # Load boxen configuration
 [[ -f ~/opt/boxen/env.sh ]] && . /opt/boxen/env.sh
 
