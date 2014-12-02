@@ -37,7 +37,7 @@ alias scaffold='script/generate nifty_scaffold'
 alias migrate='rake db:migrate'
 alias rst='touch tmp/restart.txt'
 alias b='bundle exec'
-alias rake="noglob rake"
+alias nrake="noglob rake"
 
 # other
 alias rsync="rsync --progress"
