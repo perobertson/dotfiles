@@ -2,7 +2,7 @@
 alias ..='cd ..'
 
 # ls
-if [[ `uname` == 'Linux' ]]; then
+if [[ $OSTYPE = linux* ]]; then
   alias ls="ls -F --color=auto"
 else
   alias ls="ls -GF"
@@ -12,8 +12,7 @@ alias ll="ls -l"
 alias la='ls -A'
 
 # git
-alias gf='git fetch -v'
-alias gfu='git fetch upstream -v'
+alias gf='git fetch --all -v'
 alias gl='git pull --rebase --stat'
 alias ga='git add'
 alias gp='git push'
@@ -21,6 +20,7 @@ alias gd='git diff'
 alias gc='git commit -m'
 alias gca='git commit -a'
 alias gco='git checkout'
+alias gcd='git checkout develop'
 alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
