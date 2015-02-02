@@ -29,7 +29,7 @@ alias grb="git rebase"
 
 # rails
 alias rc='rails console'
-alias rs='rails server'
+alias rs='rails server -b 0.0.0.0'
 alias rg='rails generate'
 alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
