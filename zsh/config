@@ -2,11 +2,14 @@ export EDITOR='vim'
 export CODE_PATH="$HOME/workspace"
 export GOROOT=/opt/boxen/homebrew/opt/go
 export GOPATH="$HOME/go"
-export ANDROID_HOME="$HOME/Android/Sdk"
 
 if [[ $OSTYPE = darwin* ]]; then
   export POSTGRES_HOME="/Applications/Postgres.app/Contents/Versions/9.4/bin"
   export PATH="$POSTGRES_HOME:$PATH"
+
+  export ANDROID_HOME="$HOME/Library/Android/Sdk"
+else
+  export ANDROID_HOME="$HOME/Android/Sdk"
 fi
 export PATH="$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/opt/boxen/homebrew/share/python:/opt/boxen/homebrew/share/npm/bin:/usr/local/heroku/bin:$PATH:$GOPATH/bin:$HOME/.rvm/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
