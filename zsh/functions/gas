@@ -1,0 +1,1 @@
+git rebase -i $(git merge-base HEAD $1)
