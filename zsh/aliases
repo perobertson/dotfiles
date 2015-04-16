@@ -25,6 +25,7 @@ alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gloga='git log --oneline --decorate --color --graph --all'
+alias glogd='git log --graph --decorate $(git rev-list -g --all)'
 alias grb="git rebase"
 
 # rails
