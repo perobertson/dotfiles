@@ -32,7 +32,11 @@ ZSH_THEME="pygmalion"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx brew yum git ruby bundler heroku adb vagrant)
+if [[ $OSTYPE = darwin* ]]; then
+  plugins=(osx brew git ruby bundler heroku)
+else
+  plugins=(yum git ruby bundler heroku)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,9 +48,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# Load boxen configuration
-[[ -f ~/opt/boxen/env.sh ]] && . /opt/boxen/env.sh
 
 # Load project configurations
 if [[ -d ~/.projects ]]; then
