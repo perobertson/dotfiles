@@ -34,7 +34,7 @@ alias gcb='git checkout -b'
 alias gb='git branch'
 
 alias gs='git status'
-alias gs='git status --short'
+alias gss='git status --short'
 
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
