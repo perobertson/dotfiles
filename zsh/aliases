@@ -2,31 +2,49 @@
 alias ..='cd ..'
 
 # ls
-if [[ $OSTYPE = linux* ]]; then
-  alias ls="ls -F --color=auto"
-else
+if [[ $OSTYPE = darwin* ]]; then
   alias ls="ls -GF"
+else
+  alias ls="ls -F --color=auto"
 fi
 alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
 
 # git
-alias gf='git fetch --all -v'
+alias gf='git fetch'
+alias gfa='git fetch --all --prune'
+
 alias gl='git pull --rebase --stat'
+
 alias ga='git add'
+
 alias gp='git push'
+
 alias gd='git diff'
+alias gdc='git diff --cached'
+
 alias gc='git commit -m'
 alias gca='git commit -a'
+
 alias gco='git checkout'
 alias gcd='git checkout develop'
+alias gcb='git checkout -b'
+
 alias gb='git branch'
+
 alias gs='git status'
+alias gs='git status --short'
+
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
-alias gloga='git log --oneline --decorate --color --graph --all'
+
+alias gloga='git log --graph --decorate --oneline --color --all'
 alias glogd='git log --graph --decorate $(git rev-list -g --all)'
-alias grb="git rebase"
+
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase -i'
 
 # rails
 alias rc='rails console'
