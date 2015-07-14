@@ -33,9 +33,9 @@ ZSH_THEME="pygmalion"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 if [[ $OSTYPE = darwin* ]]; then
-  plugins=(gitfast ruby bundler heroku)
+  plugins=(gitfast bundler heroku)
 else
-  plugins=(yum git ruby bundler heroku)
+  plugins=(gitfast bundler heroku)
 fi
 
 source $ZSH/oh-my-zsh.sh
