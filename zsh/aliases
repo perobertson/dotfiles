@@ -57,6 +57,7 @@ alias migrate='rake db:migrate'
 alias rst='touch tmp/restart.txt'
 alias b='bundle exec'
 alias nrake="noglob rake"
+alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
 
 # other
 alias rsync="rsync --progress"
