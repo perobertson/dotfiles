@@ -60,7 +60,7 @@ alias rst='touch tmp/restart.txt'
 alias b='bundle exec'
 alias nrake="noglob rake"
 alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
-alias kablamo="bundle && scripts/rake_nuke.sh && rake db:fixtures:load"
+alias kablamo="bundle && rake db:nuke"
 
 # other
 alias rsync="rsync --progress"
