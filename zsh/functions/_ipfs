@@ -1,0 +1,153 @@
+#compdef ipfs
+
+__ipfs_commands () {
+  local -a commands; commands=(
+    'add:Add an object to ipfs.'
+    'bitswap:A set of commands to manipulate the bitswap agent'
+    'block:Manipulate raw IPFS blocks'
+    'bootstrap:Show or edit the list of bootstrap peers'
+    'commands:List all available commands.'
+    'cat:Show IPFS object data'
+    'config:et and set IPFS config values'
+    'daemon:Run a network-connected IPFS node'
+    'dht:Issue commands directly through the DHT'
+    'dns:DNS link resolver'
+    'diag:Generates diagnostic reports'
+    'file:Interact with ipfs objects representing Unix filesystems'
+    'get:Download IPFS objects'
+    'id:Show IPFS Node ID info'
+    'init:Initializes IPFS config file'
+    'log:Interact with the daemon log output'
+    'ls:List links from an object.'
+    'mount:Mounts IPFS to the filesystem (read-only)'
+    'name:IPFS namespace (IPNS) tool'
+    'object:Interact with ipfs objects'
+    'pin:Pin (and unpin) objects to local storage'
+    'ping:send echo request packets to IPFS hosts'
+    'refs:Lists links (references) from an object'
+    'tour:An introduction to IPFS'
+    'repo:Manipulate the IPFS repo'
+    'resolve:Resolve the value of names to IPFS'
+    'stats:Query IPFS statistics'
+    'swarm:swarm inspection tool'
+    'tar:utility functions for tar files in ipfs'
+    'update:Downloads and installs updates for IPFS (disabled)'
+    'version:Shows ipfs version information'
+  )
+  _describe -t commands 'ipfs command' commands && ret=0
+}
+
+__ipfs_sub_commands () {
+  local -a common_args; common_args=(
+    '(-h|--help)'{-h,--help}'[Show the command help text]'
+  )
+  integer ret=1
+  case "$words[1]" in
+    (add)
+      _files
+      _arguments -C \
+        $common_args \
+        '(-r|--recursive)'{-r,--recursive}'[Add directory paths recursively]' \
+        '(-q|--quiet)'{-q,--quiet}'[Write minimal output]' \
+        '(-p|--progress)'{-p,--progress}'[Stream progress data]' \
+        '(-t|--trickle)'{-t,--trickle}'[Use trickle-dag format for dag generation]' \
+        '(-n|--only-hash)'{-n,--only-hash}'[Only chunk and hash - do not write to disk]' \
+        '(-w|--wrap-with-directory)'{-w,--wrap-with-directory}'[Wrap files with a directory object]' \
+        '(-H|--hidden)'{-H,--hidden}'[Include files that are hidden]' \
+        '(-s|--chunker)'{-s,--chunker}'[chunking algorithm to use]' && ret=0
+    ;;
+    (bitswap)
+      _arguments -C \
+        $common_args \
+        '(-): :->sub-command' \
+        '(-)*:: :->sub-option-or-argument' && ret=0
+      case "$state" in
+        (sub-command)
+          __ipfs_bitswap_commands && ret=0
+        ;;
+        (sub-option-or-argument)
+          __ipfs_bitswap_options && ret=0
+        ;;
+      esac
+    ;;
+    (block)
+      _arguments -C \
+        $common_args \
+        '(-): :->block-command' \
+        '(-)*:: :->block-args' && ret=0
+      case "$state" in
+        (block-command)
+          __ipfs_block_commands && ret=0
+        ;;
+        (block-args)
+          __ipfs_block_args && ret=0
+        ;;
+      esac
+    ;;
+    (*)
+      _arguments -C \
+        $common_args && ret=0
+    ;;
+  esac
+  return ret
+}
+
+__ipfs_bitswap_commands () {
+  local -a commands; commands=(
+    'wantlist:Show blocks currently on the wantlist'
+    'stat:Show some diagnostic information on the bitswap agent'
+    'unwant:Remove a given block from your wantlist'
+  )
+  _describe -t commands 'ipfs bitswap command' commands && ret=0
+}
+
+__ipfs_bitswap_options () {
+  integer ret=1
+  case "$words[1]" in
+    (wantlist)
+      _arguments -C \
+        $common_args \
+        '(-p|--peer)'{-p,--peer}'[Specify which peer to show wantlist for (default self)]' && ret=0
+    ;;
+    (*) __ipfs_general_args ;;
+  esac
+}
+
+__ipfs_block_commands () {
+  local -a commands; commands=(
+    'stat:Print information of a raw IPFS block'
+    'get:Get a raw IPFS block'
+    'put:Stores input as an IPFS block'
+  )
+  _describe -t commands 'ipfs block commands' commands && ret=0
+}
+
+__ipfs_general_args () {
+  integer ret=1
+  _arguments -C $common_args && ret=0
+  return ret
+}
+
+_ipfs () {
+  integer ret=1
+  _arguments -C \
+    '(-c|--config)'{-c,--config}'[Path to the configuration file to use]' \
+    '(-D|--debug)'{-D,--debug}'[Operate in debug mode]' \
+    '(-h|--help)'{-h,--help}'[Show the command help text]' \
+    '(-L|--local)'{-L,--local}'[Run the command locally, instead of using the daemon]' \
+    '--api[Overrides the routing option (dht, supernode)]' \
+    '(-): :->command' \
+    '(-)*:: :->arg' && ret=0
+
+  case "$state" in
+    (command)
+      __ipfs_commands && ret=0
+    ;;
+    (arg)
+      __ipfs_sub_commands && ret=0
+    ;;
+  esac
+  return ret
+}
+
+_ipfs "$@"
