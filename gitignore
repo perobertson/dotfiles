@@ -12,5 +12,6 @@ vendor/src
 .rbenv-vars
 log
 tmp
+.byebug_history
 
 nb-configuration.xml
