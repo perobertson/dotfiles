@@ -46,6 +46,8 @@ alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbi='git rebase -i'
+alias gclump="gco master && gl upstream master && gp"
+alias gprune="git zip && git zip2"
 
 # rails
 alias rc='rails console'
@@ -59,6 +61,7 @@ alias rst='touch tmp/restart.txt'
 alias b='bundle exec'
 alias nrake="noglob rake"
 alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
+alias kablamo="bundle && rake db:nuke"
 
 # docker
 alias dc='docker-compose'
