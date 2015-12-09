@@ -12,6 +12,7 @@ alias ll="ls -l"
 alias la='ls -A'
 
 # git
+alias borg='git'
 alias gf='git fetch'
 alias gfa='git fetch --all --prune'
 
