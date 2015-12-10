@@ -87,3 +87,7 @@ alias %=' '
 export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 alias t='todo.sh -c -d ~/Dropbox/todo/todo.cfg'
+
+# something from chris
+alias say='echo "$1" | espeak -a 750 -p 99 -s 100 -v f2 2>/dev/null'
+
