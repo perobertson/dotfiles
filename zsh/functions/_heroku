@@ -1,0 +1,108 @@
+#compdef heroku
+
+__heroku_commands () {
+  local -a commands; commands=(
+    'addons:manage add-on resources'
+    'apps:manage apps (create, destroy)'
+    'auth:authentication (login, logout)'
+    'config:manage app config vars'
+    'domains:manage domains'
+    'logs:display logs for an app'
+    'ps:manage dynos (dynos, workers)'
+    'releases:manage app releases'
+    'run:run one-off commands (console, rake)'
+    'sharing:manage collaborators on an app'
+    '2fa:manage two-factor authentication settings'
+    'buildpacks:manage the buildpack for an app'
+    'certs:manage ssl endpoints for an app'
+    'drains:display drains for an app'
+    'features:manage optional features'
+    'fork:clone an existing app'
+    'git:manage local git repository for app'
+    'help:list commands and display help'
+    'keys:manage authentication keys'
+    'labs:manage optional lab features'
+    'local:run heroku app locally'
+    'login:Login with your Heroku credentials.'
+    'maintenance:manage maintenance mode for an app'
+    'members:manage membership in organization accounts'
+    'orgs:manage organization accounts'
+    'pg:manage databases for an app'
+    'pgbackups:manage backups of heroku postgresql databases'
+    'plugins:manage plugins to the heroku gem'
+    'regions:list available regions'
+    'stack:manage the stack for an app'
+    'status:Status of Heroku Platform'
+    'twofactor:manage two-factor authentication settings'
+    'update:update the heroku client'
+    'version:display version'
+  )
+  _describe -t commands 'heroku command' commands
+}
+
+__heroku_sub_commands () {
+  local -a common_args; common_args=(
+    '(-h|--help)'{-h,--help}'[Show the command help text]' \
+    '(-a|--app)'{-a,--app}'[App to run command against]' \
+    '(-r|--remote)'{-r,--remote}'[Git remote of app to run command against]'
+  )
+  case "$words[1]" in
+    (run)
+      _arguments -C \
+        $common_args \
+        '(-): :->sub-command' \
+        '(-)*:: :->sub-option-or-argument'
+      case "$state" in
+        (sub-command)
+          __heroku_run_commands
+        ;;
+        (sub-option-or-argument)
+          __heroku_run_options
+        ;;
+      esac
+    ;;
+    (*)
+      _arguments -C \
+        $common_args
+    ;;
+  esac
+}
+
+__heroku_run_commands () {
+  local -a commands; commands=(
+    'bash:Runs a bash shell'
+    'rake:Runs rake'
+  )
+  _describe -t commands 'heroku run command' commands
+}
+
+__heroku_run_options () {
+  case "$words[1]" in
+    (rake)
+      _rake
+    ;;
+    (*) __heroku_general_args ;;
+  esac
+}
+
+__heroku_general_args () {
+  _arguments -C $common_args
+}
+
+_heroku () {
+  _arguments -C \
+    '(--help)'--help'[Help about the current command]' \
+    '(-): :->command' \
+    '(-)*:: :->arg'
+
+  case "$state" in
+    (command)
+      __heroku_commands
+    ;;
+    (arg)
+      __heroku_sub_commands
+    ;;
+  esac
+}
+
+_heroku "$@"
