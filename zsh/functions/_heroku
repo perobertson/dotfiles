@@ -3,38 +3,126 @@
 __heroku_commands () {
   local -a commands; commands=(
     'addons:manage add-on resources'
+
     'apps:manage apps (create, destroy)'
+    'apps\:create:create a new app'
+    'apps\:destroy:permanently destroy an app'
+    'apps\:info:show detailed app information'
+    'apps\:join:add yourself to an organization app'
+    'apps\:leave:remove yourself from an organization app'
+    'apps\:lock:lock an organization app to restrict access'
+    'apps\:open:open the app in a web browser'
+    'apps\:rename:rename the app'
+    'apps\:unlock:unlock an organization app so that any org member can join it'
+
     'auth:authentication (login, logout)'
+    'auth\:login:log in with your heroku credentials'
+    'auth\:logout:clear local authentication credentials'
+    'auth\:token:display your api token'
+    'auth\:whoami:display your heroku email address'
+
     'config:manage app config vars'
+    'config\:add:set one or more config vars'
+    'config\:get:display a config value for an app'
+    'config\:remove:unset one or more config vars'
+    'config\:set:set one or more config vars'
+    'config\:unset:unset one or more config vars'
+
     'domains:manage domains'
+    'domains\:add:add a custom domain to an app'
+    'domains\:clear:remove all custom domains from an app'
+    'domains\:remove:remove a custom domain from an app'
+
     'logs:display logs for an app'
-    'ps:manage dynos (dynos, workers)'
-    'releases:manage app releases'
-    'run:run one-off commands (console, rake)'
-    'sharing:manage collaborators on an app'
-    '2fa:manage two-factor authentication settings'
-    'buildpacks:manage the buildpack for an app'
-    'certs:manage ssl endpoints for an app'
-    'drains:display drains for an app'
-    'features:manage optional features'
-    'fork:clone an existing app'
-    'git:manage local git repository for app'
-    'help:list commands and display help'
-    'keys:manage authentication keys'
-    'labs:manage optional lab features'
-    'local:run heroku app locally'
-    'login:Login with your Heroku credentials.'
-    'maintenance:manage maintenance mode for an app'
-    'members:manage membership in organization accounts'
-    'orgs:manage organization accounts'
+
     'pg:manage databases for an app'
-    'pgbackups:manage backups of heroku postgresql databases'
+    'pg\:backups:interact with built-in backups. Without a subcommand, it lists all'
+    'pg\:copy:copys a database from SOURCE to TARGET'
+    'pg\:credentials:display the DATABASE credentials'
+    'pg\:diagnose:run diagnostics report on DATABASE'
+    'pg\:info:display database information'
+    'pg\:kill:kill a query'
+    'pg\:killall:terminates ALL connections'
+    'pg\:links:create links between data stores.  Without a subcommand, it lists all'
+    'pg\:maintenance:manage maintenance for <DATABASE>'
+    'pg\:promote:sets DATABASE as your DATABASE_URL'
+    'pg\:ps:view active queries with execution time'
+    'pg\:psql:open a psql shell to the database'
+    'pg\:pull:pull from REMOTE_SOURCE_DATABASE to TARGET_DATABASE'
+    'pg\:push:push from SOURCE_DATABASE to REMOTE_TARGET_DATABASE'
+    'pg\:reset:delete all data in DATABASE'
+    'pg\:unfollow:stop a replica from following and make it a read/write database'
+    'pg\:upgrade:unfollow a database and upgrade it to the latest PostgreSQL version'
+    'pg\:wait:monitor database creation, exit when complete'
+
+    'ps:manage dynos (dynos, workers)'
+    'ps\:restart:restart an app dyno'
+    'ps\:scale:scale dynos by the given amount'
+    'ps\:stop:stop an app dyno'
+    'ps\:type:manage dyno types'
+
+    'releases:manage app releases'
+    'releases\:info:view detailed information for a release'
+    'releases\:rollback:roll back to an older release'
+
+    'run:run one-off commands (console, rake)'
+    'run\:detached:run a detached dyno, where output is sent to your logs'
+
+    'sharing:manage collaborators on an app'
+    'sharing\:add:add a collaborator to an app'
+    'sharing\:remove:remove a collaborator from an app'
+    'sharing\:transfer:transfers an app to another user or an organization.'
+
+    'buildpacks:manage the buildpack for an app'
+    'buildpacks\:add:add new app buildpack, inserting into list of buildpacks if neccessary'
+    'buildpacks\:clear:clear all buildpacks set on the app'
+    'buildpacks\:remove:remove a buildpack set on the app'
+    'buildpacks\:set:set new app buildpack, overwriting into list of buildpacks if neccessary'
+
+    'certs:manage ssl endpoints for an app'
+
+    'drains:display drains for an app'
+
+    'features:manage optional features'
+
+    'fork:clone an existing app'
+
+    'git:manage local git repository for app'
+    'git\:clone:clones a heroku app to your local machine at DIRECTORY (defaults to app name)'
+    'git\:remote:adds a git remote to an app repo'
+
+    'help:list commands and display help'
+
+    'keys:manage authentication keys'
+
+    'labs:manage optional lab features'
+
+    'local:run heroku app locally'
+
+    'login:Login with your Heroku credentials.'
+
+    'maintenance:manage maintenance mode for an app'
+    'maintenance\:off:take the app out of maintenance mode'
+    'maintenance\:on:put the app into maintenance mode'
+
+    'members:manage membership in organization accounts'
+
+    'orgs:manage organization accounts'
+
     'plugins:manage plugins to the heroku gem'
+
     'regions:list available regions'
+
     'stack:manage the stack for an app'
+
     'status:Status of Heroku Platform'
+
     'twofactor:manage two-factor authentication settings'
+    '2fa:manage two-factor authentication settings'
+
     'update:update the heroku client'
+    'update:\beta:update to the latest beta client'
+
     'version:display version'
   )
   _describe -t commands 'heroku command' commands
