@@ -159,7 +159,8 @@ __heroku_sub_commands () {
 __heroku_run_commands () {
   local -a commands; commands=(
     'bash:Runs a bash shell'
-    'rake:Runs rake'
+    'rake:Runs a rake command'
+    'rails\ c:Runs a rails console'
   )
   _describe -t commands 'heroku run command' commands
 }
