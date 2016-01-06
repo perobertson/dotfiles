@@ -49,6 +49,7 @@ alias grbi='git rebase -i'
 # rails
 alias rc='rails console'
 alias rs='rails server -b 0.0.0.0'
+alias rss='puma -b "ssl://127.0.0.1:3000?key=$HOME/.ssh/server.key&cert=$HOME/.ssh/server.crt"'
 alias rg='rails generate'
 alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
