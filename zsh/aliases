@@ -75,10 +75,11 @@ if [[ $? -eq 0 ]]; then
   alias ds='dnf search'
   alias dp='dnf info'
   alias di='sudo dnf install'
-  alias du='sudo dnf update'
+  alias du='sudo dnf upgrade'
   alias dr='sudo dnf remove'
-  alias dgi='sudo dnf groupinstall'
-  alias dgr='sudo dnf groupremove'
+  alias dgi='sudo dnf group install'
+  alias dgu='sudo dnf group upgrade'
+  alias dgr='sudo dnf group remove'
 fi
 
 # commands starting with % for pasting from web
