@@ -1,0 +1,61 @@
+#compdef eb
+
+__eb_commands () {
+  local -a commands; commands=(
+    'abort:Cancels an environment update or deployment.'
+    'clone:Clones an environment.'
+    'config:Edits the environment configuration settings or manages saved configurations.'
+    'console:Opens the environment in the AWS Elastic Beanstalk Management Console.'
+    'create:Creates a new environment.'
+    'deploy:Deploys your source code to the environment.'
+    'events:Gets recent events.'
+    'health:Shows detailed environment health.'
+    'init:Initializes your directory with the EB CLI. Creates the application.'
+    'labs:Extra experimental commands.'
+    'list:Lists all environments.'
+    'local:Runs commands on your local machine.'
+    'logs:Gets recent logs.'
+    'open:Opens the application URL in a browser.'
+    'platform:Manages platforms.'
+    'printenv:Shows the environment variables.'
+    'scale:Changes the number of running instances.'
+    'setenv:Sets environment variables.'
+    'ssh:Opens the SSH client to connect to an instance.'
+    'status:Gets environment information and status.'
+    'swap:Swaps two environment CNAMEs with each other.'
+    'terminate:Terminates the environment.'
+    'upgrade:Updates the environment to the most recent platform version.'
+    'use:Sets default environment.'
+  )
+  _describe -t commands 'eb command' commands
+}
+
+__eb_sub_commands () {
+  local -a common_args; common_args=(
+    '(-h|--help)'{-h,--help}'[Show the command help text]'
+  )
+  case "$words[1]" in
+    (*)
+      _arguments -C \
+        $common_args
+    ;;
+  esac
+}
+
+_eb () {
+  _arguments -C \
+    '(--help)'--help'[Help about the current command]' \
+    '(-): :->command' \
+    '(-)*:: :->arg'
+
+  case "$state" in
+    (command)
+      __eb_commands
+    ;;
+    (arg)
+      __eb_sub_commands
+    ;;
+  esac
+}
+
+_eb "$@"
