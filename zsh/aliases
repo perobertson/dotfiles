@@ -53,8 +53,7 @@ alias rss='puma -b "ssl://127.0.0.1:3000?key=$HOME/.ssh/server.key&cert=$HOME/.s
 alias rg='rails generate'
 alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
-alias scaffold='script/generate nifty_scaffold'
-alias migrate='rake db:migrate'
+alias migrate='rake db:migrate db:test:prepare'
 alias rst='touch tmp/restart.txt'
 alias b='bundle exec'
 alias nrake="noglob rake"
@@ -70,7 +69,7 @@ alias rt="ruby -Itest"
 alias zt="zeus tests"
 alias tmux="TERM=screen-256color-bce tmux -2"
 
-which dnf > /dev/null
+hash dnf 2> /dev/null
 if [[ $? -eq 0 ]]; then
   alias ds='dnf search'
   alias dp='dnf info'

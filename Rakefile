@@ -35,7 +35,7 @@ task :install, :automated do |t, args|
 
   unless Dir.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
     puts "Installing oh-my-zsh"
-    system %Q{git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh}
+    system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh}
   end
 end
 
