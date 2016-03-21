@@ -4,8 +4,8 @@ source ~/.bash/paths
 source ~/.bash/config
 source ~/.bash/prompt
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# Set up rbenv
+eval "$(rbenv init -)"
 
 # use .localrc for settings specific to one system
 if [ -f ~/.localrc ]; then

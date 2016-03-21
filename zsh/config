@@ -9,7 +9,7 @@ if [[ $OSTYPE = darwin* ]]; then
 else
   export ANDROID_HOME="$HOME/Android/Sdk"
 fi
-export PATH="$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/heroku/bin:$PATH:$HOME/.rvm/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
+export PATH="$HOME/.rbenv/bin:$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/heroku/bin:$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 fpath=(~/.zsh/functions $fpath)

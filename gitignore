@@ -13,5 +13,6 @@ vendor/src
 log
 tmp
 .byebug_history
+.ruby-version
 
 nb-configuration.xml
