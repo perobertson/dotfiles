@@ -2,9 +2,9 @@
 if [ -f Capfile ]; then
   recent=`last_modified .cap_tasks~ Capfile **/deploy.rb`
   if [[ $recent != '.cap_tasks~' ]]; then
-    cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap vm \1/" > .cap_tasks~
-    cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap staging \1/" >> .cap_tasks~
-    cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap production \1/" >> .cap_tasks~
+    bundle exec cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap vm \1/" > .cap_tasks~
+    bundle exec cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap staging \1/" >> .cap_tasks~
+    bundle exec cap --tasks | grep '#' | sed "s/cap \(\S*\)\s*#.*/cap production \1/" >> .cap_tasks~
   fi
   compadd `cat .cap_tasks~`
 fi
