@@ -70,18 +70,6 @@ alias zt="zeus tests"
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias ssh-keygen='ssh-keygen -b 4096'
 
-hash dnf 2> /dev/null
-if [[ $? -eq 0 ]]; then
-  alias ds='dnf search'
-  alias dp='dnf info'
-  alias di='sudo dnf install'
-  alias du='sudo dnf upgrade'
-  alias dr='sudo dnf remove'
-  alias dgi='sudo dnf group install'
-  alias dgu='sudo dnf group upgrade'
-  alias dgr='sudo dnf group remove'
-fi
-
 # commands starting with % for pasting from web
 alias %=' '
 
