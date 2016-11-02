@@ -2,12 +2,18 @@
 
 __dsetool_commands () {
   local -a commands; commands=(
+    'core_indexing_status:<keyspace.cf> - Returns the current indexing status (INDEXING, FAILED, FINISHED) of a given core'
+    'create_core:<keyspace.cf> schema=<path> solrconfig=<path> distributed=<true|false> recovery=<true|false> deleteAll=<true|false> reindex=<true|false> generateResources=<true|false>'
     'get_core_config:<keyspace.cf> <current=true|false> - Outputs the latest uploaded solrconfig. If current is set to true returns the current live one.'
     'get_core_schema:<keyspace.cf> <current=true|false> - Outputs the latest uploaded schema. If current is set to true returns the current live one.'
+    'infer_solr_schema:<keyspace.cf> - Returns a proposal schema for the specified Keyspace.ColumnFamily'
     'inmemorystatus:Returns a list of the in-memory tables for this node and the amount of memory each table is using, or information about a single table if the keyspace and columnfamily are given.'
-    'reload_core:<keyspace.cf> - Reloads a core with the given keyspace and cf/table name'
+    'node_health:Returns a health score between 0 and 1 for the node'
+    'read_resource:<keyspace.cf> <name=name of the resource we want to read> - Reads a DSE Search resource file.'
+    'reload_core:<keyspace.cf> schema=<path> solrconfig=<path> distributed=<true|false> deleteAll=<true|false> reindex=<true|false> - Reloads a core with the given keyspace and cf/table name'
+    'ring:List the nodes in the ring including their node type.'
     'status:List the nodes in the ring including their node type.'
-    'unload_core:<keyspace.cf> - Effectively destroys a core without modifying its backing table.'
+    'unload_core:<keyspace.cf> deleteDataDir=<true|false> deleteResources=<true|false> distributed=<true|false> - Effectively destroys a core without modifying its backing table.'
   )
   _describe -t commands 'dsetool command' commands
 }
