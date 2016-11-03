@@ -18,7 +18,38 @@ __dsetool_commands () {
   _describe -t commands 'dsetool command' commands
 }
 
+__dsetool_cache_keyspace () {
+  if [ ! -f /tmp/cassandra-keyspaces-zsh ]; then
+    cqlsh -e 'select keyspace_name,columnfamily_name from system.schema_columnfamilies;' | grep '|' | grep -v keyspace_name | sed -e s/\|/\./ | sed -e 's/\ //g' > /tmp/cassandra-keyspaces-zsh
+  fi
+}
+
+__dsetool_keyspace_arg () {
+  __dsetool_cache_keyspace
+  compadd $(cat /tmp/cassandra-keyspaces-zsh)
+}
+
 __dsetool_sub_commands () {
+  case "$words[1]" in
+    (help)
+      _arguments -C \
+        '(-): :->help-command'
+      case "$state" in
+        (help-command) __dsetool_commands ;;
+      esac
+    ;;
+    (core_indexing_status) __dsetool_keyspace_arg ;;
+    (create_core) __dsetool_keyspace_arg ;;
+    (get_core_config) __dsetool_keyspace_arg ;;
+    (get_core_schema) __dsetool_keyspace_arg ;;
+    (infer_solr_schema) __dsetool_keyspace_arg ;;
+    (read_resource) __dsetool_keyspace_arg ;;
+    (reload_core) __dsetool_keyspace_arg ;;
+    (unload_core) __dsetool_keyspace_arg ;;
+  esac
+}
+
+_dsetool () {
   local -a common_args; common_args=(
     '(-a|--jmxusername)'{-a,--jmxusername}'[JMX user name]' \
     '(-b|--jmxpassword)'{-b,--jmxpassword}'[JMX password]' \
@@ -31,27 +62,11 @@ __dsetool_sub_commands () {
     '(-s|--port)'{-s,--port}'[Solr port to use]' \
     '(-u|--use_hadoop_config)'{-u,--use_hadoop_config}'[get cassandra host from hadoop configuration]'
   )
-  case "$words[1]" in
-    (help)
-      _arguments -C \
-        '(-): :->help-command'
-      case "$state" in
-        (help-command)
-          __dsetool_commands
-        ;;
-      esac
-    ;;
-    (*)
-      _arguments -C \
-        $common_args
-    ;;
-  esac
-}
 
-_dsetool () {
   _arguments -C \
     '(-): :->command' \
-    '(-)*:: :->arg'
+    '(-)*:: :->arg' \
+    $common_args
 
   case "$state" in
     (command)
