@@ -58,6 +58,7 @@ alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
 
 # python
 alias activate='. env/bin/activate'
+alias pclean='find . -name "*.pyc" -delete && find . -name "__pycache__" -delete'
 
 # other
 alias rsync="rsync --progress"
