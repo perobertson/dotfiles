@@ -1,0 +1,81 @@
+#compdef gsettings
+
+__gsettings_commands () {
+  local -a commands; commands=(
+    'help:Show this information'
+    'list-schemas:List installed schemas'
+    'list-relocatable-schemas:List relocatable schemas'
+    'list-keys:List keys in a schema'
+    'list-children:List children of a schema'
+    'list-recursively:List keys and values, recursively'
+    'range:Queries the range of a key'
+    'describe:Queries the description of a key'
+    'get:Get the value of a key'
+    'set:Set the value of a key'
+    'reset:Reset the value of a key'
+    'reset-recursively:Reset all values in a given schema'
+    'writable:Check if a key is writable'
+    'monitor:Watch for changes'
+  )
+  _describe -t commands 'gsettings command' commands
+}
+
+__gsettings_comp_schema () {
+  compadd $(gsettings list-schemas)
+}
+
+__gsettings_comp_schema_key () {
+  _arguments -C \
+    '(-): :->schema' \
+    '(-)*:: :->key'
+
+  case "$state" in
+    (schema)
+      compadd $(gsettings list-schemas)
+    ;;
+    (key)
+      compadd $(gsettings list-keys $words[1])
+    ;;
+  esac
+}
+
+__gsettings_sub_commands () {
+  case "$words[1]" in
+    (help)
+      _arguments -C \
+        '(-): :->help-command'
+      case "$state" in
+        (help-command) __gsettings_commands ;;
+      esac
+    ;;
+    (list-children)     __gsettings_comp_schema ;;
+    (list-keys)         __gsettings_comp_schema ;;
+    (list-recursively)  __gsettings_comp_schema ;;
+    (get)               __gsettings_comp_schema_key ;;
+    (set)               __gsettings_comp_schema_key ;;
+    (monitor)           __gsettings_comp_schema_key ;;
+    (range)             __gsettings_comp_schema_key ;;
+    (describe)          __gsettings_comp_schema_key ;;
+    (reset)             __gsettings_comp_schema_key ;;
+    (reset-recursively) __gsettings_comp_schema ;;
+    (writable)          __gsettings_comp_schema_key ;;
+    (monitor)           __gsettings_comp_schema_key ;;
+  esac
+}
+
+_gsettings () {
+  _arguments -C \
+    '(-): :->command' \
+    '(-)*:: :->arg'
+
+  case "$state" in
+    (command)
+      __gsettings_commands
+    ;;
+    (arg)
+      __gsettings_sub_commands
+    ;;
+  esac
+}
+
+_gsettings "$@"
