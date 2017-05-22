@@ -1,2 +1,2 @@
 #compdef gas
-compadd $(git branch | grep \* -v)
+compadd $(git branch -a | grep \* -v | sed 's/remotes\///' | sed 's/origin\/HEAD.*//')
