@@ -32,11 +32,7 @@ ZSH_THEME="pygmalion"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-if [[ $OSTYPE = darwin* ]]; then
-  plugins=(gitfast bundler docker docker-compose)
-else
-  plugins=(gitfast bundler docker docker-compose knife pip)
-fi
+plugins=(gitfast bundler docker docker-compose knife pip)
 
 source $ZSH/oh-my-zsh.sh
 
