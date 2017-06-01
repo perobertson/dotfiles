@@ -2,11 +2,7 @@
 alias ..='cd ..'
 
 # ls
-if [[ $OSTYPE = darwin* ]]; then
-  alias ls="ls -GF"
-else
-  alias ls="ls -F --color=auto"
-fi
+alias ls="ls -F --color=auto"
 alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
