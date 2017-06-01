@@ -35,7 +35,7 @@ ZSH_THEME="pygmalion"
 if [[ $OSTYPE = darwin* ]]; then
   plugins=(gitfast bundler docker docker-compose)
 else
-  plugins=(gitfast bundler docker docker-compose knife)
+  plugins=(gitfast bundler docker docker-compose knife pip)
 fi
 
 source $ZSH/oh-my-zsh.sh
