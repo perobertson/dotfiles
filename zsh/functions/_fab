@@ -1,6 +1,7 @@
 #compdef fab
 
-if [[ -d fabfile && -n $VIRTUAL_ENV ]]; then
+hash fab
+if [[ $? -eq 0 && -d fabfile ]]; then
   recent=$(last_modified .fab_tasks~ fabfile/**/*.py)
   if [[ $recent != '.fab_tasks~' ]]; then
     fab --list 2>/dev/null | grep '    .*' | sed -r 's/\ *([a-zA-Z._]*)\ *(.*)/\1/' > .fab_tasks~
