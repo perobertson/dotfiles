@@ -1,0 +1,1 @@
+cat /dev/urandom|od -t x1|awk 'NR > line { pos=int(rand()*15)+2;printf("%s",$pos);line=NR+(rand()*1000);digits = digits+2 } digits == 64 { print("\n");exit }'
