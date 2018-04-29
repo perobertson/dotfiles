@@ -1,4 +1,4 @@
 # go to saved path if there is one
-if [[ -f ~/.saved_path~ ]]; then
-  cd `cat ~/.saved_path~`
+if [[ -f "$HOME/.saved_path~" ]]; then
+    cd $(cat "$HOME/.saved_path~")
 fi
