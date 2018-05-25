@@ -42,6 +42,9 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh/aliases
 . ~/.zsh/completion
 
+# Set up pyenv
+eval "$(pyenv init -)"
+
 # Set up rbenv
 eval "$(rbenv init -)"
 
