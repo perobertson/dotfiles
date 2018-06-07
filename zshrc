@@ -48,5 +48,8 @@ eval "$(pyenv init -)"
 # Set up rbenv
 eval "$(rbenv init -)"
 
+# Set up pipenv
+eval "$(pipenv --completion)"
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
