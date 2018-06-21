@@ -16,3 +16,4 @@ tmp
 .ruby-version
 .idea/
 nb-configuration.xml
+.pytest_cache/
