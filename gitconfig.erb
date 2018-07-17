@@ -17,11 +17,12 @@
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
 	editor = vim
 	autocrlf = input
-	pager = less -F
 [apply]
 	whitespace = nowarn
 [format]
 	pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
+[pager]
+	branch = false
 [push]
 	default = simple
 [merge]
