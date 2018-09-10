@@ -11,7 +11,7 @@ from pathlib import Path
 
 def short_help():
     """Print the help message and exits."""
-    print('install.py [-h]')
+    print('install.py [-h] [--dry-run]')
     sys.exit(2)
 
 
@@ -19,7 +19,7 @@ def long_help():
     short_help()
 
 
-def link_file(link, target):
+def link_file(link, target, dry_run=False):
     """Create a symlink at link to target.
 
     :param link:    the name of the link to create
@@ -30,10 +30,11 @@ def link_file(link, target):
     target_uri = target.resolve()
     link_uri = link.resolve()
     print("linking file '{}' to '{}'".format(link_uri, target_uri))
-    symlink(target_uri, link_uri, target_is_directory=target.is_dir())
+    if not dry_run:
+        symlink(target_uri, link_uri, target_is_directory=target.is_dir())
 
 
-def replace_file(link, target):
+def replace_file(link, target, dry_run=False):
     """Replace file at link with a symlink to target.
 
     :param link:    the name of the link to create
@@ -44,12 +45,13 @@ def replace_file(link, target):
     target_uri = target.resolve()
     link_uri = link.resolve()
     print("replacing file: {}".format(link))
-    backup_uri = "{}.bak".format(link_uri)
-    link.replace(backup_uri)
-    symlink(target_uri, link_uri, target_is_directory=target.is_dir())
+    if not dry_run:
+        backup_uri = "{}.bak".format(link_uri)
+        link.replace(backup_uri)
+        symlink(target_uri, link_uri, target_is_directory=target.is_dir())
 
 
-def install_gitconfig():
+def install_gitconfig(dry_run=False):
     """Install the global gitconfig file.
 
     This file is special because we want some sections to be untracked.
@@ -66,15 +68,17 @@ def install_gitconfig():
             content = f.read()
         if include_path not in content:
             print("\tappending include section")
-            with global_config_file.open(mode='a') as f:
-                print(new_content, file=f)
+            if not dry_run:
+                with global_config_file.open(mode='a') as f:
+                    print(new_content, file=f)
     else:
         print("creating {}".format(global_config_file))
-        with global_config_file.open(mode='w') as f:
-            print(new_content, file=f)
+        if not dry_run:
+            with global_config_file.open(mode='w') as f:
+                print(new_content, file=f)
 
 
-def install():
+def install(dry_run=False):
     p = Path('.')
     to_skip = {
         '.git',
@@ -97,25 +101,28 @@ def install():
             elif f.is_dir() and filecmp.dircmp(f, home_dir_file):
                 print("identical {}".format(home_dir_file))
             else:
-                replace_file(home_dir_file, f)
+                replace_file(home_dir_file, f, dry_run=dry_run)
         else:
-            link_file(home_dir_file, f)
-    install_gitconfig()
+            link_file(home_dir_file, f, dry_run=dry_run)
+    install_gitconfig(dry_run=dry_run)
 
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, 'h', ['help'])
+        opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
     except getopt.GetoptError:
         short_help()
 
+    dry_run = False
     for opt, arg in opts:
         if opt == '-h':
             short_help()
         elif opt == '--help':
             long_help()
+        elif opt == '--dry-run':
+            dry_run = True
 
-    install()
+    install(dry_run=dry_run)
 
 
 if __name__ == '__main__':
