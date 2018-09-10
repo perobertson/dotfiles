@@ -1,6 +1,9 @@
 [alias]
 	co = checkout
-	la = "!git config -l | grep ^alias. | cut -c 7-"
+	la = config --includes --get-regexp alias
+	standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since=yesterday --date=relative
+[apply]
+	whitespace = nowarn
 [color]
 	diff = auto
 	status = auto
@@ -9,13 +12,12 @@
 	excludesfile = ~/.gitignore
 	editor = vim
 	autocrlf = input
-[apply]
-	whitespace = nowarn
 [format]
 	pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
-[pager]
-	branch = false
-[push]
-	default = simple
 [merge]
 	tool = vimdiff3
+[pager]
+	branch = false
+	config = false
+[push]
+	default = simple
