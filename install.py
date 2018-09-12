@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import filecmp
 import getopt
+import subprocess
 import sys
 from os import symlink
 from pathlib import Path
@@ -78,7 +79,7 @@ def install_gitconfig(dry_run=False):
                 print(new_content, file=f)
 
 
-def install(script, dry_run=False):
+def install_dotfiles(script, dry_run=False):
     to_skip = {
         '.git',
         '.gitignore',
@@ -106,6 +107,18 @@ def install(script, dry_run=False):
     install_gitconfig(dry_run=dry_run)
 
 
+def install_oh_my_zsh(script, dry_run=False):
+    zsh_path = Path('~/.oh-my-zsh').expanduser()
+    if zsh_path.exists():
+        print("oh-my-zsh is already installed")
+        return
+
+    print("Installing oh-my-zsh")
+    if not dry_run:
+        cmd = 'git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"'
+        subprocess.run(cmd, shell=True, check=True)
+
+
 def main(script, argv):
     try:
         opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
@@ -121,7 +134,8 @@ def main(script, argv):
         elif opt == '--dry-run':
             dry_run = True
 
-    install(script, dry_run=dry_run)
+    install_dotfiles(script, dry_run=dry_run)
+    install_oh_my_zsh(script, dry_run=dry_run)
 
 
 if __name__ == '__main__':
