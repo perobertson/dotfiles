@@ -78,8 +78,7 @@ def install_gitconfig(dry_run=False):
                 print(new_content, file=f)
 
 
-def install(dry_run=False):
-    p = Path('.')
+def install(script, dry_run=False):
     to_skip = {
         '.git',
         '.gitignore',
@@ -91,7 +90,7 @@ def install(dry_run=False):
         'README.md',
         'README.rdoc',
     }
-    for f in p.iterdir():
+    for f in script.parent.iterdir():
         if f.name in to_skip:
             continue
         home_dir_file = Path('~').joinpath(".{}".format(f.name)).expanduser()
@@ -107,7 +106,7 @@ def install(dry_run=False):
     install_gitconfig(dry_run=dry_run)
 
 
-def main(argv):
+def main(script, argv):
     try:
         opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
     except getopt.GetoptError:
@@ -122,8 +121,9 @@ def main(argv):
         elif opt == '--dry-run':
             dry_run = True
 
-    install(dry_run=dry_run)
+    install(script, dry_run=dry_run)
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    script_path = Path(sys.argv[0])
+    main(script_path.resolve(), sys.argv[1:])
