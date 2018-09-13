@@ -29,7 +29,14 @@ def link_file(link, target, dry_run=False):
     :type target:   pathlib.Path
     """
     target_uri = target.resolve()
-    link_uri = link.resolve()
+    try:
+        link_uri = link.resolve()
+    except FileNotFoundError as e:
+        # python3.5 raises this when the file does not exist
+        # try creating the simlink if non absolute path in this case
+        print("could not resolve path; got: {}".format(e))
+        print('trying absolute path instead')
+        link_uri = link.absolute()
     print("linking file '{}' to '{}'".format(link_uri, target_uri))
     if not dry_run:
         symlink(target_uri, link_uri, target_is_directory=target.is_dir())
