@@ -28,18 +28,9 @@ def link_file(link, target, dry_run=False):
     :param target:  the target that the link points to
     :type target:   pathlib.Path
     """
-    target_uri = target.resolve()
-    try:
-        link_uri = link.resolve()
-    except FileNotFoundError as e:
-        # python3.5 raises this when the file does not exist
-        # try creating the simlink if non absolute path in this case
-        print("could not resolve path; got: {}".format(e))
-        print('trying absolute path instead')
-        link_uri = link.absolute()
-    print("linking file '{}' to '{}'".format(link_uri, target_uri))
+    print("linking file '{}' -> '{}'".format(link, target))
     if not dry_run:
-        symlink(target_uri, link_uri, target_is_directory=target.is_dir())
+        link.symlink_to(target, target_is_directory=target.is_dir())
 
 
 def replace_file(link, target, dry_run=False):
@@ -59,14 +50,14 @@ def replace_file(link, target, dry_run=False):
         symlink(target_uri, link_uri, target_is_directory=target.is_dir())
 
 
-def install_gitconfig(dry_run=False):
+def install_gitconfig(script, dry_run=False):
     """Install the global gitconfig file.
 
     This file is special because we want some sections to be untracked.
     Use include to handle this case https://git-scm.com/docs/git-config#_includes
     """
     global_config_file = Path('~').joinpath('.gitconfig').expanduser()
-    source_config_file = Path('.').joinpath('gitconfig')
+    source_config_file = script.parent.joinpath('gitconfig')
     include_path = "path = {}".format(source_config_file.resolve())
     new_content = "[include]\n\t{}".format(include_path)
 
@@ -103,15 +94,13 @@ def install_dotfiles(script, dry_run=False):
             continue
         home_dir_file = Path('~').joinpath(".{}".format(f.name)).expanduser()
         if home_dir_file.exists():
-            if f.is_file() and filecmp.cmp(f, home_dir_file):
-                print("identical {}".format(home_dir_file))
-            elif f.is_dir() and filecmp.dircmp(f, home_dir_file):
+            if f.samefile(home_dir_file):
                 print("identical {}".format(home_dir_file))
             else:
                 replace_file(home_dir_file, f, dry_run=dry_run)
         else:
             link_file(home_dir_file, f, dry_run=dry_run)
-    install_gitconfig(dry_run=dry_run)
+    install_gitconfig(script, dry_run=dry_run)
 
 
 def install_oh_my_zsh(script, dry_run=False):
