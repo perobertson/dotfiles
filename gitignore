@@ -17,3 +17,4 @@ tmp
 .idea/
 nb-configuration.xml
 .pytest_cache/
+.python-version
