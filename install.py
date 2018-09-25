@@ -31,6 +31,7 @@ def link_file(link, target, dry_run=False, backup=False):
     print("linking file '{}' -> '{}'".format(link, target))
     if not dry_run:
         if backup:
+            link_uri = link.resolve()
             backup_uri = "{}.bak".format(link_uri)
             print("created backup '{}'".format(backup_uri))
             link.replace(backup_uri)
