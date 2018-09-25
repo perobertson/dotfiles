@@ -20,7 +20,7 @@ def long_help():
     short_help()
 
 
-def link_file(link, target, dry_run=False):
+def link_file(link, target, dry_run=False, backup=False):
     """Create a symlink at link to target.
 
     :param link:    the name of the link to create
@@ -30,24 +30,11 @@ def link_file(link, target, dry_run=False):
     """
     print("linking file '{}' -> '{}'".format(link, target))
     if not dry_run:
+        if backup:
+            backup_uri = "{}.bak".format(link_uri)
+            print("created backup '{}'".format(backup_uri))
+            link.replace(backup_uri)
         link.symlink_to(target, target_is_directory=target.is_dir())
-
-
-def replace_file(link, target, dry_run=False):
-    """Replace file at link with a symlink to target.
-
-    :param link:    the name of the link to create
-    :type link:     pathlib.Path
-    :param target:  the target that the link points to
-    :type target:   pathlib.Path
-    """
-    target_uri = target.resolve()
-    link_uri = link.resolve()
-    print("replacing file: {}".format(link))
-    if not dry_run:
-        backup_uri = "{}.bak".format(link_uri)
-        link.replace(backup_uri)
-        symlink(target_uri, link_uri, target_is_directory=target.is_dir())
 
 
 def install_gitconfig(script, dry_run=False):
@@ -97,7 +84,7 @@ def install_dotfiles(script, dry_run=False):
             if f.samefile(home_dir_file):
                 print("identical {}".format(home_dir_file))
             else:
-                replace_file(home_dir_file, f, dry_run=dry_run)
+                link_file(home_dir_file, f, dry_run=dry_run, backup=True)
         else:
             link_file(home_dir_file, f, dry_run=dry_run)
     install_gitconfig(script, dry_run=dry_run)
