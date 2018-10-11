@@ -18,3 +18,5 @@ tmp
 nb-configuration.xml
 .pytest_cache/
 .python-version
+.eggs/
+.tox/
