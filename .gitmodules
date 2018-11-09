@@ -1,3 +1,11 @@
+[submodule "vim/bundle/ctrlp.vim"]
+	path = vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+
+[submodule "vim/bundle/vim-gocode"]
+	path = vim/bundle/vim-gocode
+	url = https://github.com/Blackrush/vim-gocode.git
+
 [submodule "vim/snippets"]
 	path = vim/snippets
-	url = git://github.com/scrooloose/snipmate-snippets.git
+	url = https://github.com/scrooloose/snipmate-snippets.git

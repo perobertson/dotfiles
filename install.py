@@ -103,6 +103,16 @@ def install_oh_my_zsh(script, dry_run=False):
         subprocess.run(cmd, shell=True, check=True)
 
 
+def fetch_submodules(script, dry_run=False):
+    if dry_run:
+        print('git submodule init')
+        print('git submodule update')
+    else:
+        cwd = script.parent
+        subprocess.run('git submodule init', shell=True, check=True, cwd=cwd)
+        subprocess.run('git submodule update', shell=True, check=True, cwd=cwd)
+
+
 def main(script, argv):
     try:
         opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
@@ -118,6 +128,7 @@ def main(script, argv):
         elif opt == '--dry-run':
             dry_run = True
 
+    fetch_submodules(script, dry_run=dry_run)
     install_dotfiles(script, dry_run=dry_run)
     install_oh_my_zsh(script, dry_run=dry_run)
 
