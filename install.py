@@ -108,7 +108,7 @@ def fetch_submodules(script, dry_run=False):
         print('git submodule init')
         print('git submodule update')
     else:
-        cwd = script.parent
+        cwd = str(script.parent.resolve())
         subprocess.run('git submodule init', shell=True, check=True, cwd=cwd)
         subprocess.run('git submodule update', shell=True, check=True, cwd=cwd)
 
