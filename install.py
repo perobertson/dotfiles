@@ -45,7 +45,7 @@ def install_gitconfig(script, dry_run=False):
     Use include to handle this case https://git-scm.com/docs/git-config#_includes
     """
     global_config_file = Path('~').joinpath('.gitconfig').expanduser()
-    source_config_file = script.parent.joinpath('gitconfig')
+    source_config_file = script.parent.joinpath('dotfiles').joinpath('gitconfig')
     include_path = "path = {}".format(source_config_file.resolve())
     new_content = "[include]\n\t{}".format(include_path)
 
@@ -66,6 +66,12 @@ def install_gitconfig(script, dry_run=False):
 
 
 def install_dotfiles(script, dry_run=False):
+    """Install the dotfiles.
+
+    :param script: Path object to this file
+    :type script: pathlib.Path
+    :param dry_run: True if the commands should be displayed instead of executed
+    """
     to_skip = {
         '.git',
         '.gitignore',
@@ -77,8 +83,11 @@ def install_dotfiles(script, dry_run=False):
         'README.md',
         'README.rdoc',
     }
-    for f in script.parent.iterdir():
+    script.joinpath
+    dotfiles = script.parent.joinpath('dotfiles')
+    for f in dotfiles.iterdir():
         if f.name in to_skip:
+            print("skipping: {}".format(f.name))
             continue
         home_dir_file = Path('~').joinpath(".{}".format(f.name)).expanduser()
         if home_dir_file.exists():
