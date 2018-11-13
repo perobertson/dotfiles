@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
 # coding: utf-8
-from __future__ import absolute_import
+"""Setup script for installing dotfiles on a new computer."""
 
-import filecmp
+from __future__ import generator_stop
+
 import getopt
 import subprocess
 import sys
-from os import symlink
 from pathlib import Path
 
 
-def short_help():
+def _short_help():
     """Print the help message and exits."""
     print('install.py [-h] [--dry-run]')
     sys.exit(2)
 
 
-def long_help():
-    short_help()
+def _long_help():
+    _short_help()
 
 
-def link_file(link, target, dry_run=False, backup=False):
+def _link_file(link, target, dry_run=False, backup=False):
     """Create a symlink at link to target.
 
     :param link:    the name of the link to create
@@ -38,7 +38,7 @@ def link_file(link, target, dry_run=False, backup=False):
         link.symlink_to(target, target_is_directory=target.is_dir())
 
 
-def install_gitconfig(script, dry_run=False):
+def _install_gitconfig(script, dry_run=False):
     """Install the global gitconfig file.
 
     This file is special because we want some sections to be untracked.
@@ -65,7 +65,7 @@ def install_gitconfig(script, dry_run=False):
                 print(new_content, file=f)
 
 
-def install_dotfiles(script, dry_run=False):
+def _install_dotfiles(script, dry_run=False):
     """Install the dotfiles.
 
     :param script: Path object to this file
@@ -94,13 +94,13 @@ def install_dotfiles(script, dry_run=False):
             if f.samefile(home_dir_file):
                 print("identical {}".format(home_dir_file))
             else:
-                link_file(home_dir_file, f, dry_run=dry_run, backup=True)
+                _link_file(home_dir_file, f, dry_run=dry_run, backup=True)
         else:
-            link_file(home_dir_file, f, dry_run=dry_run)
-    install_gitconfig(script, dry_run=dry_run)
+            _link_file(home_dir_file, f, dry_run=dry_run)
+    _install_gitconfig(script, dry_run=dry_run)
 
 
-def install_oh_my_zsh(script, dry_run=False):
+def _install_oh_my_zsh(script, dry_run=False):
     zsh_path = Path('~/.oh-my-zsh').expanduser()
     if zsh_path.exists():
         print("oh-my-zsh is already installed")
@@ -112,7 +112,7 @@ def install_oh_my_zsh(script, dry_run=False):
         subprocess.run(cmd, shell=True, check=True)
 
 
-def fetch_submodules(script, dry_run=False):
+def _fetch_submodules(script, dry_run=False):
     if dry_run:
         print('git submodule init')
         print('git submodule update')
@@ -123,23 +123,24 @@ def fetch_submodules(script, dry_run=False):
 
 
 def main(script, argv):
+    """Install the dotfiles and initialize submodules."""
     try:
         opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
     except getopt.GetoptError:
-        short_help()
+        _short_help()
 
     dry_run = False
     for opt, arg in opts:
         if opt == '-h':
-            short_help()
+            _short_help()
         elif opt == '--help':
-            long_help()
+            _long_help()
         elif opt == '--dry-run':
             dry_run = True
 
-    fetch_submodules(script, dry_run=dry_run)
-    install_dotfiles(script, dry_run=dry_run)
-    install_oh_my_zsh(script, dry_run=dry_run)
+    _fetch_submodules(script, dry_run=dry_run)
+    _install_dotfiles(script, dry_run=dry_run)
+    _install_oh_my_zsh(script, dry_run=dry_run)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,32 @@
+lint:
+  stage: build
+  image: python:latest
+  tags:
+    - docker
+  script:
+    - pip install --user --upgrade pip
+    - pip install --user --upgrade flake8 \
+        flake8-docstrings \
+        flake8-future-import \
+        flake8-import-order \
+        pep8-naming
+    - ~/.local/bin/flake8 --statistics install.py
+
+deploy_github:
+  stage: deploy
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "${GITHUB_KEY}" > ~/.ssh/id_rsa
+    - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
+    - chmod 700 ~/.ssh/id_rsa*
+    - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
+    - git remote add github -t master git@github.com:perobertson/dotfiles.git
+    - git fetch --all --verbose
+    - git checkout -B ${CI_COMMIT_REF_SLUG}
+    - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
+  environment:
+    name: github
+  only:
+    refs:
+      - master
