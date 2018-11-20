@@ -1,3 +1,13 @@
+.base_test: &base_test
+  stage: test
+  tags:
+    - docker
+  before_script:
+    - apk update
+    - apk add git
+  script:
+    - ./install.py
+
 lint:
   stage: build
   image: python:latest
@@ -11,6 +21,19 @@ lint:
         flake8-import-order \
         pep8-naming
     - ~/.local/bin/flake8 --statistics install.py
+
+py35:
+  <<: *base_test
+  image: python:3.5-alpine
+
+py36:
+  <<: *base_test
+  image: python:3.6-alpine
+  <<: *base_test
+
+py37:
+  <<: *base_test
+  image: python:3.7-alpine
 
 deploy_github:
   stage: deploy
