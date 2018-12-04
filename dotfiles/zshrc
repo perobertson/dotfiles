@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -34,7 +34,7 @@ ZSH_THEME="pygmalion"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(gitfast bundler docker docker-compose knife pip)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # Customize to your needs...
 
@@ -43,13 +43,19 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh/completion
 
 # Set up pyenv
-eval "$(pyenv init -)"
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init -)"
+fi
 
 # Set up rbenv
-eval "$(rbenv init -)"
+if [ -x "$(command -v rbenv)" ]; then
+  eval "$(rbenv init -)"
+fi
 
 # Set up pipenv
-eval "$(pipenv --completion)"
+if [ -x "$(command -v pipenv)" ]; then
+  eval "$(pipenv --completion)"
+fi
 
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
