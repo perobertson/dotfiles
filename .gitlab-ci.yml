@@ -43,6 +43,7 @@ deploy_github:
     - echo "${GITHUB_KEY}" > ~/.ssh/id_rsa
     - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
     - chmod 700 ~/.ssh/id_rsa*
+    - ls -lah ~/.ssh/
     - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
     - git remote add github -t master git@github.com:perobertson/dotfiles.git
     - git fetch --all --verbose
