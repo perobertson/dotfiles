@@ -20,3 +20,4 @@ nb-configuration.xml
 .python-version
 .eggs/
 .tox/
+*.egg-info/
