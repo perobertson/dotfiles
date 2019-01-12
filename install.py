@@ -5,19 +5,26 @@
 from __future__ import generator_stop
 
 import getopt
+import logging
 import subprocess
 import sys
 from pathlib import Path
 
-
-def _short_help():
-    """Print the help message and exits."""
-    print('install.py [-h] [--dry-run]')
-    sys.exit(2)
+log = logging.getLogger(__name__)
 
 
-def _long_help():
-    _short_help()
+def _help():
+    """Print the help message."""
+    print('install.py [-h|--help] [-v|--verbose] [--dry-run]')
+
+
+def _verbose_logging():
+    log.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    log.addHandler(handler)
 
 
 def _link_file(link, target, dry_run=False, backup=False):
@@ -100,6 +107,49 @@ def _install_dotfiles(script, dry_run=False):
     _install_gitconfig(script, dry_run=dry_run)
 
 
+def _install_configs(script, dry_run=False):
+    """Create symlinks in the home config to the dotfiles project.
+
+    This will only create symlinks for files to avoid pulling in additional configs.
+    """
+    def sync_dir(config_dir, target_dir):
+        # make sure the directory exists in the home path
+        config_dir.mkdir(parents=True, exist_ok=True)
+
+        for target in target_dir.iterdir():
+            if target.is_dir():
+                sync_dir(config_dir.joinpath(target.name), target)
+            elif target.is_file():
+                config_file = config_dir.joinpath(target.name)
+
+                is_file = config_file.is_file()
+                is_link = config_file.is_symlink()
+                is_same = (is_file or is_link) and config_file.samefile(target)
+
+                msg = "file://{}\n  is_file:{}\n  is_symlink:{}\n  samefile:{}".format(
+                    config_file,
+                    is_file,
+                    is_link,
+                    is_same,
+                )
+                log.debug(msg)
+
+                if not is_same:
+                    if is_file:
+                        backup_uri = "{}.bak".format(config_file.resolve())
+                        backup_path = Path(backup_uri)
+                        log.info("Creating backup: {}".format(backup_path))
+                        if not dry_run:
+                            config_file.replace(backup_path)
+                    log.info("Creating link: {} -> {}".format(config_file, target))
+                    if not dry_run:
+                        config_file.symlink_to(target, target_is_directory=target.is_dir())
+
+    config_dir = Path('~').joinpath('.config').expanduser()
+    target_configs = script.parent.joinpath('config')
+    sync_dir(config_dir, target_configs)
+
+
 def _install_oh_my_zsh(script, dry_run=False):
     zsh_path = Path('~/.oh-my-zsh').expanduser()
     if zsh_path.exists():
@@ -125,22 +175,29 @@ def _fetch_submodules(script, dry_run=False):
 def main(script, argv):
     """Install the dotfiles and initialize submodules."""
     try:
-        opts, args = getopt.getopt(argv, 'h', ['help', 'dry-run'])
-    except getopt.GetoptError:
-        _short_help()
+        opts, args = getopt.getopt(argv, 'hv', ['dry-run', 'help', 'verbose'])
+    except getopt.GetoptError as e:
+        log.error(e)
+        _help()
+        sys.exit(1)
+
+    # init logging first
+    for opt, arg in opts:
+        if opt == '-v' or opt == '--verbose':
+            _verbose_logging()
 
     dry_run = False
     for opt, arg in opts:
-        if opt == '-h':
-            _short_help()
-        elif opt == '--help':
-            _long_help()
+        if opt == '-h' or opt == '--help':
+            _help()
+            sys.exit(0)
         elif opt == '--dry-run':
             dry_run = True
 
     _fetch_submodules(script, dry_run=dry_run)
     _install_dotfiles(script, dry_run=dry_run)
     _install_oh_my_zsh(script, dry_run=dry_run)
+    _install_configs(script, dry_run=dry_run)
 
 
 if __name__ == '__main__':

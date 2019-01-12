@@ -1,0 +1,54 @@
+// SublimeLinter Settings - User
+{
+  "linters": {
+    "bashate": {
+      "ignore": "E006",
+      "selector": "source.shell",
+    },
+    "flake8": {
+      "python": null,
+      "disable": false,
+      "args": [
+        // D100: Missing docstring in public module
+        // D101: Missing docstring in public class
+        // D102: Missing docstring in public method
+        // D103: Missing docstring in public function
+        // D104: Missing docstring in public package
+        // D105: Missing docstring in magic method
+        // D106: Missing docstring in public nested class
+        // D107: Missing docstring in __init__
+        // E501: line length
+        // I100: imports groups in wrong order
+        // I101: import names in wrong order
+        "--ignore=D100,D101,D102,D103,D104,D105,D106,D107,E501",
+        // Override any project setting
+        "--select=A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
+      ],
+      "excludes": [],
+      "ignore": "",
+      "max-complexity": 10,
+      "max-line-length": null,
+      "select": ""
+    },
+    "rubocop": {
+      "use_bundle_exec": true
+    },
+    "shellcheck": {
+      "args": [
+        "--external-sources"
+      ]
+    }
+  },
+  "paths": {
+    "linux": [
+      "~/.rbenv/shims",
+      "~/.rbenv/bin",
+      "~/.pyenv/shims",
+      "~/bin",
+      "~/.bin",
+      "~/.local/bin"
+    ],
+    "osx": [],
+    "windows": []
+  },
+}
