@@ -52,10 +52,5 @@ if [ -x "$(command -v rbenv)" ]; then
   eval "$(rbenv init -)"
 fi
 
-# Set up pipenv
-if [ -x "$(command -v pipenv)" ]; then
-  eval "$(pipenv --completion)"
-fi
-
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
