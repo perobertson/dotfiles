@@ -1,0 +1,7 @@
+Host *
+    StrictHostKeyChecking accept-new
+    ServerAliveInterval 300
+    ServerAliveCountMax 2
+
+
+Include local_config

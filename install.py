@@ -107,47 +107,58 @@ def _install_dotfiles(script, dry_run=False):
     _install_gitconfig(script, dry_run=dry_run)
 
 
-def _install_configs(script, dry_run=False):
-    """Create symlinks in the home config to the dotfiles project.
+def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False):
+    """Link files in the local dir to the target dir.
 
     This will only create symlinks for files to avoid pulling in additional configs.
     """
-    def sync_dir(config_dir, target_dir):
-        # make sure the directory exists in the home path
-        config_dir.mkdir(parents=True, exist_ok=True)
+    # make sure the directory exists in the home path
+    local_dir.mkdir(parents=True, exist_ok=True)
 
-        for target in target_dir.iterdir():
-            if target.is_dir():
-                sync_dir(config_dir.joinpath(target.name), target)
-            elif target.is_file():
-                config_file = config_dir.joinpath(target.name)
+    for target in target_dir.iterdir():
+        if target.is_dir():
+            _link_files(local_dir.joinpath(target.name), target)
+        elif target.is_file():
+            config_file = local_dir.joinpath(target.name)
 
-                is_file = config_file.is_file()
-                is_link = config_file.is_symlink()
-                is_same = (is_file or is_link) and config_file.samefile(target)
+            is_file = config_file.is_file()
+            is_link = config_file.is_symlink()
+            is_same = (is_file or is_link) and config_file.samefile(target)
 
-                msg = "file://{}\n  is_file:{}\n  is_symlink:{}\n  samefile:{}".format(
-                    config_file,
-                    is_file,
-                    is_link,
-                    is_same,
-                )
-                log.debug(msg)
+            msg = "file://{}\n  is_file:{}\n  is_symlink:{}\n  samefile:{}".format(
+                config_file,
+                is_file,
+                is_link,
+                is_same,
+            )
+            log.debug(msg)
 
-                if not is_same:
-                    if is_file:
-                        backup_uri = "{}.bak".format(config_file.resolve())
-                        backup_path = Path(backup_uri)
-                        log.info("Creating backup: {}".format(backup_path))
-                        if not dry_run:
-                            config_file.replace(backup_path)
-                    log.info("Creating link: {} -> {}".format(config_file, target))
-                    if not dry_run:
-                        config_file.symlink_to(target, target_is_directory=target.is_dir())
+            if is_same:
+                continue
 
+            if is_file:
+                backup_uri = "{}.bak".format(config_file.resolve())
+                backup_path = Path(backup_uri)
+                log.info("Creating backup: {}".format(backup_path))
+                if not dry_run:
+                    config_file.replace(backup_path)
+            log.info("Creating link: {} -> {}".format(config_file, target))
+            if not dry_run:
+                config_file.symlink_to(target, target_is_directory=target.is_dir())
+
+
+def _install_configs(script, dry_run=False):
+    """Create symlinks in the home config to the dotfiles project."""
     config_dir = Path('~').joinpath('.config').expanduser()
     target_configs = script.parent.joinpath('config')
-    sync_dir(config_dir, target_configs)
+    _link_files(config_dir, target_configs, dry_run=dry_run)
+
+
+def _install_ssh_config(script, dry_run=False):
+    """Install default ssh configs."""
+    config_dir = Path('~').joinpath('.ssh').expanduser()
+    target_configs = script.parent.joinpath('ssh')
+    _link_files(config_dir, target_configs, dry_run=dry_run)
 
 
 def _install_oh_my_zsh(script, dry_run=False):
@@ -198,6 +209,7 @@ def main(script, argv):
     _install_dotfiles(script, dry_run=dry_run)
     _install_oh_my_zsh(script, dry_run=dry_run)
     _install_configs(script, dry_run=dry_run)
+    _install_ssh_config(script, dry_run=dry_run)
 
 
 if __name__ == '__main__':
