@@ -8,39 +8,32 @@ alias ll="ls -l"
 alias la='ls -A'
 
 # git
-alias gf='git fetch'
-alias gfa='git fetch --all --prune'
-
-alias gl='git pull --rebase --stat'
-
+alias g='git'
 alias ga='git add'
-
-alias gp='git push'
-
-alias gd='git diff'
-alias gdc='git diff --cached'
-
+alias gb='git branch'
 alias gc='git commit -m'
 alias gca='git commit -a'
-
-alias gco='git checkout'
-alias gcd='git checkout develop'
 alias gcb='git checkout -b'
-
-alias gb='git branch'
-
-alias gs='git status'
-alias gss='git status --short'
-
-alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
-
+alias gcd='git checkout develop'
+alias gco='git checkout'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdw='git diff --word-diff'
+alias gf='git fetch'
+alias gfa='git fetch --all --prune'
+alias gk='\gitk --all --branches'
+alias gl='git pull --rebase --stat'
+alias glog='git log --oneline --decorate --color --graph'
 alias gloga='git log --graph --decorate --oneline --color --all'
 alias glogd='git log --graph --decorate $(git rev-list -g --all)'
-
+alias gp='git push'
 alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbi='git rebase -i'
+alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias gs='git status'
+alias gss='git status --short'
 
 # rails
 alias rt="rails test"
