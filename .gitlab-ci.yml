@@ -6,11 +6,11 @@
     - apk update
     - apk add git
   script:
-    - ./install.py
+    - ./install.py -vv
     - git status --short && test "$(git status --short)" = ""
 
 lint:
-  stage: build
+  stage: test
   image: python:latest
   tags:
     - docker
