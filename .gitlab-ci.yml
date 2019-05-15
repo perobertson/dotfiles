@@ -7,6 +7,7 @@
     - apk add git
   script:
     - ./install.py
+    - git status --short && test "$(git status --short)" = ""
 
 lint:
   stage: build
@@ -23,17 +24,20 @@ lint:
     - ~/.local/bin/flake8 --statistics install.py
 
 py35:
-  <<: *base_test
   image: python:3.5-alpine
+  <<: *base_test
 
 py36:
-  <<: *base_test
   image: python:3.6-alpine
   <<: *base_test
 
 py37:
-  <<: *base_test
   image: python:3.7-alpine
+  <<: *base_test
+
+py38:
+  image: python:3.8-alpine
+  <<: *base_test
 
 deploy_github:
   stage: deploy
