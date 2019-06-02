@@ -6,6 +6,7 @@
 		".eslintrc",
 		".csslintrc",
 		"geojson",
-		".jshintrc"
+		".jshintrc",
+		"ejson"
 	]
 }
