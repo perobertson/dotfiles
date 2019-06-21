@@ -18,9 +18,8 @@ except ImportError:
         """Return the text without colouring it."""
         return text
 
-FORMT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 FORMAT = maybe_colored(
-    '%(asctime)-s %(levelname)-8s [%(name)s] %(filename)s:%(lineno)s',
+    '%(asctime)-s %(levelname)-8s %(filename)s:%(lineno)s',
     'cyan'
 ) + maybe_colored(
     ' %(funcName)s',

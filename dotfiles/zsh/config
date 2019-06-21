@@ -2,6 +2,7 @@ export EDITOR='vim'
 export CODE_PATH="$HOME/workspace"
 
 export PYENV_ROOT="$HOME/.pyenv"
+export TFENV_ROOT="$HOME/.tfenv"
 export RBENV_ROOT="$HOME/.rbenv"
 
 # virtual environments will modify the path then reopen a shell
@@ -11,7 +12,9 @@ if [[ "$DOTFILES_PATH" = '' ]]; then
     export PATH="$HOME/bin:$HOME/.bin:$HOME/.local/bin:$PATH"
 
     # Prefer virtual envs over user bins
-    export PATH="$PYENV_ROOT/bin:$RBENV_ROOT/bin:$PATH"
+    export PATH="$RBENV_ROOT/bin:$PATH"
+    export PATH="$TFENV_ROOT/bin:$PATH"
+    export PATH="$PYENV_ROOT/bin:$PATH"
 
     export DOTFILES_PATH=1
 fi
