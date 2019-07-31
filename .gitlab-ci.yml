@@ -20,7 +20,9 @@ lint:
         flake8-docstrings \
         flake8-future-import \
         flake8-import-order \
-        pep8-naming
+        pep8-naming \
+        'pydocstyle<4.0.0'
+    - pip check
     - ~/.local/bin/flake8 --statistics install.py
 
 py35:
