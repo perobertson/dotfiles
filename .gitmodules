@@ -9,3 +9,7 @@
 [submodule "vim/snippets"]
 	path = dotfiles/vim/snippets
 	url = https://github.com/scrooloose/snipmate-snippets.git
+
+[submodule "vim/Vundle.vim"]
+	path = dotfiles/vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
