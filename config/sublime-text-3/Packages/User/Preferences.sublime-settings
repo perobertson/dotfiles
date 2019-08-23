@@ -8,6 +8,7 @@
 		".eggs",
 		".git",
 		".pytest_cache",
+		".terraform",
 		".tox",
 		"__pycache__",
 		"_site",
