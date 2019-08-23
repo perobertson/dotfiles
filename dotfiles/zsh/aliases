@@ -37,6 +37,7 @@ alias grbi='git rebase -i'
 alias grbs='git rebase --skip'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gs='git status'
+alias gsc='git commit -S -m'
 alias gss='git status --short'
 
 # rails
