@@ -52,5 +52,10 @@ if [ -x "$(command -v rbenv)" ]; then
   eval "$(rbenv init -)"
 fi
 
+# Set up aws completions
+if [ -x "$(command -v aws_zsh_completer.sh)" ]; then
+  source "$(command -v aws_zsh_completer.sh)"
+fi
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
