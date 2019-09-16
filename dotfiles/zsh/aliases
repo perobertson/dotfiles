@@ -57,6 +57,9 @@ alias pyc="./scripts/console.sh"
 alias pycl='find . -name "*.pyc" -delete && find . -name "__pycache__" -delete'
 alias pys="py runserver.py"
 
+# terraform
+alias tf='terraform'
+
 # other
 alias rsync="rsync --progress"
 alias tmux="TERM=screen-256color-bce tmux -2"
