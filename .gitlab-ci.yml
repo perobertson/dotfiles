@@ -40,7 +40,6 @@ py37:
 py38:
   image: python:3.8-alpine
   <<: *base_test
-  when: manual
 
 deploy_github:
   stage: deploy
