@@ -1,10 +1,6 @@
 // SublimeLinter Settings - User
 {
   "linters": {
-    "bashate": {
-      "ignore": "E006",
-      "selector": "source.shell",
-    },
     "flake8": {
       "python": null,
       "disable": false,
