@@ -2,9 +2,9 @@ export EDITOR='vim'
 export CODE_PATH="$HOME/workspace"
 export GPG_TTY=$(tty)
 
-export PYENV_ROOT="$HOME/.pyenv"
-export TFENV_ROOT="$HOME/.tfenv"
-export RBENV_ROOT="$HOME/.rbenv"
+export PYENV_ROOT="$HOME/Applications/pyenv"
+export TFENV_ROOT="$HOME/Applications/tfenv"
+export RBENV_ROOT="$HOME/Applications/rbenv"
 
 # virtual environments will modify the path then reopen a shell
 # this will make sure we do not clobber the virtual env path
