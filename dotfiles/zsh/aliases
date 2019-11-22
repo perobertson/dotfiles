@@ -61,6 +61,7 @@ alias pys="py runserver.py"
 alias tf='terraform'
 
 # other
+alias aws-whoami="aws sts get-caller-identity"
 alias rsync="rsync --progress"
 alias tmux="TERM=screen-256color-bce tmux -2"
 alias ssh-keygen='ssh-keygen -t ed25519'
