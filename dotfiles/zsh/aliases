@@ -50,18 +50,12 @@ alias migrate='rails db:migrate'
 alias be='bundle exec'
 alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
 
-# python
-alias activate='. env/bin/activate'
-alias py='python2.7'
-alias pyc="./scripts/console.sh"
-alias pycl='find . -name "*.pyc" -delete && find . -name "__pycache__" -delete'
-alias pys="py runserver.py"
-
 # terraform
 alias tf='terraform'
 
 # other
 alias aws-whoami="aws sts get-caller-identity"
+alias fsubl='subl "$(find . -type d -name '.git' | sed s/.git// | fzf)"'
 alias rsync="rsync --progress"
-alias tmux="TERM=screen-256color-bce tmux -2"
 alias ssh-keygen='ssh-keygen -t ed25519'
+alias tmux="TERM=screen-256color-bce tmux -2"
