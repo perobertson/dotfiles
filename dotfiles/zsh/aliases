@@ -55,8 +55,8 @@ alias tf='terraform'
 
 # other
 alias aws-whoami="aws sts get-caller-identity"
-alias fcd='cd "$(find . -type d -name '.git' | sed s/.git// | fzf)"'
-alias fsubl='subl "$(find . -type d -name '.git' | sed s/.git// | fzf)"'
+alias fcd='cd "$(find . -type d -name '.git' | sed s/\\.git// | fzf)"'
+alias fsubl='subl "$(find . -type d -name '.git' | sed s/\\.git// | fzf)"'
 alias rsync="rsync --progress"
 alias ssh-keygen='ssh-keygen -t ed25519'
 alias tmux="TERM=screen-256color-bce tmux -2"
