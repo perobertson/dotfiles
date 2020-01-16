@@ -1,4 +1,4 @@
-.base_test: &base_test
+.base_test:
   stage: test
   tags:
     - docker
@@ -27,19 +27,19 @@ lint:
 
 py35:
   image: python:3.5-alpine
-  <<: *base_test
+  extends: .base_test
 
 py36:
   image: python:3.6-alpine
-  <<: *base_test
+  extends: .base_test
 
 py37:
   image: python:3.7-alpine
-  <<: *base_test
+  extends: .base_test
 
 py38:
   image: python:3.8-alpine
-  <<: *base_test
+  extends: .base_test
 
 deploy_github:
   stage: deploy
@@ -56,6 +56,14 @@ deploy_github:
     - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
   environment:
     name: github
+  only:
+    refs:
+      - master
+
+trigger_scripts:
+  stage: deploy
+  trigger:
+    project: perobertson/scripts
   only:
     refs:
       - master
