@@ -1,6 +1,8 @@
 {
-  "extensions":
-  [
-    ".flake8"
-  ]
+	"extensions":
+	[
+		".flake8",
+		"service",
+		"timer"
+	]
 }
