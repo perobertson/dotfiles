@@ -1,5 +1,9 @@
 {
 	"extensions":
 	[
+		"bash_profile",
+		"bashrc",
+		"zlogin",
+		"zshrc"
 	]
 }
