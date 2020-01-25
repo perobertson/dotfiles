@@ -1,0 +1,33 @@
+{
+	"bootstrapped": false,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ApplySyntax",
+		"Dockerfile Syntax Highlighting",
+		"EditorConfig",
+		"FileIcons",
+		"Git",
+		"INI",
+		"Jedi - Python autocompletion",
+		"Jinja2",
+		"JSON Reindent",
+		"nginx",
+		"Package Control",
+		"PowerShell",
+		"Python Fix Imports",
+		"Sphinx Ref Helper",
+		"StGitlab",
+		"sublack",
+		"SublimeLinter",
+		"SublimeLinter-flake8",
+		"SublimeLinter-rubocop",
+		"SublimeLinter-shellcheck",
+		"Terraform",
+		"TOML",
+		"TypeScript",
+		"ZSH"
+	]
+}

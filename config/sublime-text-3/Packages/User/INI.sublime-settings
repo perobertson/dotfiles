@@ -1,8 +1,10 @@
 {
 	"extensions":
 	[
-		".flake8",
+		"ini.dist",
 		"service",
+		".npmrc",
+		".flake8",
 		"timer"
 	]
 }
