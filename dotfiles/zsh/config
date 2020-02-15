@@ -22,9 +22,9 @@ fi
 
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
-fpath=(~/.zsh/functions $fpath)
+fpath=($HOME/.zsh/functions $fpath)
 
-autoload -U ~/.zsh/functions/*(:t)
+autoload -U $HOME/.zsh/functions/*(:t)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
