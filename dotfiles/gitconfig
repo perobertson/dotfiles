@@ -8,6 +8,8 @@
 	diff = auto
 	status = auto
 	branch = auto
+[commit]
+	gpgsign = true
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
