@@ -17,8 +17,9 @@ prompt_setup_pygmalion(){
 }
 
 prompt_pygmalion_precmd(){
+  local pyinfo=""
   if [[ $VIRTUAL_ENV != '' ]]; then
-    local pyinfo="%{$fg[green]%}🐍%{$fg[red]%}|%{$reset_color%}"
+    pyinfo="%{$fg[green]%}🐍%{$fg[red]%}|%{$reset_color%}"
   fi
 
   local gitinfo=$(git_prompt_info)
@@ -27,11 +28,11 @@ prompt_pygmalion_precmd(){
   local prompt_length=${#exp_nocolor}
 
   local nl=""
-
   if [[ $prompt_length -gt 40 ]]; then
     nl=$'\n%{\r%}';
   fi
-  PROMPT="$base_prompt$pyinfo$gitinfo$nl$post_prompt"
+
+  PROMPT="${base_prompt}${pyinfo}${gitinfo}${nl}${post_prompt}"
 }
 
 prompt_setup_pygmalion
