@@ -1,0 +1,5 @@
+if [[ -z "${AWS_TOKEN_EXPIRATION:-}" ]]; then
+  RPROMPT="$(aws-whoami|jq '.Arn' -r)"
+else
+  RPROMPT="$(date --date="TZ=\"America/Toronto\" $AWS_TOKEN_EXPIRATION")-$(aws-whoami|jq '.Arn' -r)"
+fi
