@@ -1,0 +1,25 @@
+{
+  "clients":
+  {
+    "terraform":
+    {
+      "command":
+      [
+        "terraform-lsp",
+        "-enable-log-file",
+        "-log-location",
+        "/tmp/"
+      ],
+      "enabled": true,
+      "languageId": "terraform",
+      "scopes":
+      [
+        "source.terraform"
+      ],
+      "syntaxes":
+      [
+        "Packages/Terraform/Terraform.sublime-syntax"
+      ]
+    }
+  }
+}
