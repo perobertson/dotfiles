@@ -9,12 +9,18 @@ import logging
 import subprocess
 import sys
 from pathlib import Path
+from typing import Optional
 
 try:
     from termcolor import colored
     maybe_colored = colored
 except ImportError:
-    def maybe_colored(text, color, attrs=None):
+    def maybe_colored(
+        text: str,
+        color: Optional[str] = None,
+        on_color: Optional[str] = None,
+        attrs: Optional[str] = None,
+    ) -> str:
         """Return the text without colouring it."""
         return text
 
@@ -115,7 +121,7 @@ def _install_dotfiles(script, dry_run=False):
     _install_gitconfig(script, dry_run=dry_run)
 
 
-def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False):
+def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False) -> None:
     """Link files in the local dir to the target dir.
 
     This will only create symlinks for files to avoid pulling in additional configs.
@@ -125,7 +131,7 @@ def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False):
 
     for target in target_dir.iterdir():
         if target.is_dir():
-            _link_files(local_dir.joinpath(target.name), target)
+            _link_files(local_dir.joinpath(target.name), target, dry_run)
         elif target.is_file():
             config_file = local_dir.joinpath(target.name)
 
@@ -185,7 +191,7 @@ def _install_oh_my_zsh(script, dry_run=False):
     _link_files(zsh_custom_path, target_configs, dry_run=dry_run)
 
 
-def _fetch_submodules(script, dry_run=False):
+def _fetch_submodules(script: Path, dry_run: bool = False) -> None:
     log.info('initializing submodules')
     if dry_run:
         log.debug('git submodule init')
@@ -196,7 +202,7 @@ def _fetch_submodules(script, dry_run=False):
         subprocess.run('git submodule update', shell=True, check=True, cwd=cwd)
 
 
-def main(script, argv):
+def main(script: Path, argv: list) -> None:
     """Install the dotfiles and initialize submodules."""
     try:
         opts, args = getopt.getopt(argv, 'hv', ['dry-run', 'help', 'verbose'])
