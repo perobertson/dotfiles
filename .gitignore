@@ -1,3 +1,4 @@
 *.bak
 vim/.netrwhist
 vim/.VimballRecord
+.vscode
