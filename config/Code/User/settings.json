@@ -1,5 +1,6 @@
 {
     "editor.fontFamily": "'Inconsolata Medium', 'Fira Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 18,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.quickSuggestions": {
@@ -78,6 +79,6 @@
         "enabled": true,
         "args": []
     },
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0.01,
     "workbench.colorTheme": "Monokai"
 }
