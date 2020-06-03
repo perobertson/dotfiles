@@ -40,16 +40,6 @@ alias gs='git status'
 alias gsc='git commit -S -m'
 alias gss='git status --short'
 
-# rails
-alias rt="rails test"
-alias rc='rails console'
-alias rs='rails server -b 0.0.0.0'
-alias rss='puma -b "ssl://127.0.0.1:3000?key=$HOME/.ssh/server.key&cert=$HOME/.ssh/server.crt"'
-alias rg='rails generate'
-alias migrate='rails db:migrate'
-alias be='bundle exec'
-alias rfind='find . -name "*.rb" | xargs grep -n'  # Find ruby file
-
 # terraform
 alias tf='terraform'
 
