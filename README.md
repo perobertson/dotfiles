@@ -16,8 +16,9 @@ cd ~/.dotfiles
 I am running on Linux and occasionally use Mac OS X. I primarily use zsh,
 but this includes some older bash files as well. If you would like to switch
 to zsh, you can do so with the following command.
+
 ```bash
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 ```
 
 ## Features
@@ -25,17 +26,20 @@ chsh -s $(which zsh)
 I normally place all of my coding projects in `~/workspace`.
 This directory can easily be accessed (and tab completed) with the "c" command.
 This can be configured by exporting `CODE_PATH` from the .localrc file.
+
 ```
 c re<tab>
 ```
 
 There is also an "h" command which behaves similar, but acts on the
 home path.
+
 ```
 h doc<tab>
 ```
 
 Tab completion is also added to rake and cap commands:
+
 ```
 rake db:mi<tab>
 cap de<tab>
@@ -55,6 +59,7 @@ the prompt while in a git repository.
 
 If you're using Rails, you'll find some handy aliases (below). You can
 also use show_log and hide_log in script/console to show the log inline.
+
 ```
 rc       # rails console
 rs       # rails server -b 0.0.0.0
