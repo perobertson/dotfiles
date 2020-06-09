@@ -1,4 +1,5 @@
 {
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'Inconsolata Medium', 'Fira Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 18,
     "editor.formatOnSave": true,
@@ -9,6 +10,7 @@
         "strings": true
     },
     "editor.renderWhitespace": "all",
+    "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "liveshare.guestApprovalRequired": true,
     "peacock.favoriteColors": [
