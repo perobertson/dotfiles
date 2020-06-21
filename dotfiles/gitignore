@@ -1,1 +1,2 @@
 # Only ignore things that the dotfiles create
+.gitignore.d/
