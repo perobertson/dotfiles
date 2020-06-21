@@ -50,20 +50,22 @@ deploy_github:
     - echo "${GITHUB_KEY_PUB}" > ~/.ssh/id_rsa.pub
     - chmod 700 ~/.ssh/id_rsa*
     - ssh-keyscan 'github.com' >> ~/.ssh/known_hosts
-    - git remote add github -t master git@github.com:perobertson/dotfiles.git
+    - git remote add github -t main git@github.com:perobertson/dotfiles.git
     - git fetch --all --verbose
-    - git checkout -B ${CI_COMMIT_REF_SLUG}
-    - git push --set-upstream github ${CI_COMMIT_REF_SLUG}
+    - git checkout -B "${CI_COMMIT_REF_NAME}"
+    - git push --set-upstream github "${CI_COMMIT_REF_NAME}"
+  after_script:
+    - rm ~/.ssh/id_rsa
+    - rm ~/.ssh/id_rsa.pub
   environment:
     name: github
-  only:
-    refs:
-      - master
+  resource_group: github
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
 
 trigger_scripts:
   stage: deploy
   trigger:
     project: perobertson/scripts
-  only:
-    refs:
-      - master
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
