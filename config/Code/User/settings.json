@@ -10,6 +10,10 @@
         "strings": true
     },
     "editor.renderWhitespace": "all",
+    "editor.rulers": [
+        80,
+        120
+    ],
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "liveshare.guestApprovalRequired": true,
@@ -78,8 +82,10 @@
         ]
     },
     "terraform.languageServer": {
-        "enabled": true,
-        "args": []
+        "external": false,
+        "args": [
+            "serve"
+        ]
     },
     "window.zoomLevel": 0.01,
     "workbench.colorTheme": "Monokai"
