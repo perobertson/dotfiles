@@ -14,6 +14,7 @@
         80,
         120
     ],
+    "editor.autoIndent": "advanced",
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "liveshare.guestApprovalRequired": true,
