@@ -72,7 +72,11 @@
             "value": "#42b883"
         }
     ],
+    "python.formatting.provider": "autopep8",
+    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.pythonPath": "/home/perobertson/Applications/pyenv/shims/python",
     "terraform.indexing": {
         "enabled": false,
         "liveIndexing": false,
