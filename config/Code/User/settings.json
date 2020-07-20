@@ -15,6 +15,9 @@
         120
     ],
     "editor.autoIndent": "advanced",
+    "files.associations": {
+        ".localrc": "shellscript"
+    },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "liveshare.guestApprovalRequired": true,
