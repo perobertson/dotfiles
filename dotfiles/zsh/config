@@ -7,6 +7,14 @@ export PYENV_ROOT="$HOME/Applications/pyenv"
 export TFENV_ROOT="$HOME/Applications/tfenv"
 export RBENV_ROOT="$HOME/Applications/rbenv"
 
+if [[ -d "$HOME/go" ]]; then
+    export GOPATH="$HOME/go"
+    if [[ "$DOTFILES_PATH" = '' ]]; then
+        # Prefer go bins over system
+        export PATH="$GOPATH/bin:$PATH"
+    fi
+fi
+
 # virtual environments will modify the path then reopen a shell
 # this will make sure we do not clobber the virtual env path
 if [[ "$DOTFILES_PATH" = '' ]]; then
@@ -21,6 +29,7 @@ if [[ "$DOTFILES_PATH" = '' ]]; then
     export DOTFILES_PATH=1
 fi
 
+# op config defaulted to ~/.op/ instead of the default config directory
 export OP_CONFIG_DIR="${XDG_CONFIG_HOME:=${HOME}/.config}/op"
 if [[ ! -d "${OP_CONFIG_DIR}" ]]; then
     mkdir -p "${OP_CONFIG_DIR}"
