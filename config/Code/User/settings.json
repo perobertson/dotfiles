@@ -20,12 +20,16 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "files.watcherExclude": {
+        "**/.terraform/**": true
+    },
     "liveshare.guestApprovalRequired": true,
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
     "python.pythonPath": "/home/perobertson/Applications/pyenv/shims/python",
+    "python.showStartPage": false,
     "window.zoomLevel": 0.01,
     "workbench.colorTheme": "Monokai"
 }
