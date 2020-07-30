@@ -28,6 +28,9 @@
     "liveshare.guestApprovalRequired": true,
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=119"
+    ],
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
     "python.linting.mypyArgs": [
