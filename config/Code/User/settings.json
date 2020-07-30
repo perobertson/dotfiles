@@ -16,7 +16,9 @@
     ],
     "editor.autoIndent": "advanced",
     "files.associations": {
-        ".localrc": "shellscript"
+        ".localrc": "shellscript",
+        "*.make": "makefile",
+        "*.mk": "makefile"
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -28,8 +30,18 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
+    "python.linting.mypyArgs": [
+        "--follow-imports=normal",
+        "--show-column-numbers",
+        "--strict"
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": false,
     "python.pythonPath": "/home/perobertson/Applications/pyenv/shims/python",
     "python.showStartPage": false,
     "window.zoomLevel": 0.01,
-    "workbench.colorTheme": "Monokai"
+    "workbench.colorTheme": "Monokai",
+    "[dockerfile]": {
+        "editor.formatOnSave": false
+    }
 }
