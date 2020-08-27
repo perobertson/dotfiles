@@ -7,19 +7,22 @@ export PYENV_ROOT="$HOME/Applications/pyenv"
 export TFENV_ROOT="$HOME/Applications/tfenv"
 export RBENV_ROOT="$HOME/Applications/rbenv"
 
-if [[ -d "$HOME/go" ]]; then
-    export GOPATH="$HOME/go"
-    if [[ "$DOTFILES_PATH" = '' ]]; then
-        # Prefer go bins over system
-        export PATH="$GOPATH/bin:$PATH"
-    fi
-fi
+export GOPATH="$HOME/go"
 
 # virtual environments will modify the path then reopen a shell
 # this will make sure we do not clobber the virtual env path
 if [[ "$DOTFILES_PATH" = '' ]]; then
+    # Prefer python bins over system
+    export PATH="$HOME/.local/bin:$PATH"
+
+    # Prefer go bins over python
+    export PATH="$GOPATH/bin:$PATH"
+
+    # Prefer rust bins over go
+    export PATH="$HOME/.cargo/bin:$PATH"
+
     # Prefer user bins over system
-    export PATH="$HOME/bin:$HOME/.bin:$HOME/.local/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
 
     # Prefer virtual envs over user bins
     export PATH="$RBENV_ROOT/bin:$PATH"
