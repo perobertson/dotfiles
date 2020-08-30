@@ -7,6 +7,21 @@ alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
 
+if [ "$(command -v exa)" ]; then
+    unalias -m 'ls'
+    unalias -m 'l'
+    unalias -m 'll'
+    unalias -m 'la'
+    alias ls='exa --color auto -s type -F'
+    alias l="ls -laH"
+    alias la="ls -a"
+    alias ll="ls -l --git"
+    alias lg="ls -lG"
+    # Icons require a nerd font
+    # https://www.nerdfonts.com/font-downloads
+    alias li="ll --icons"
+fi
+
 # git
 alias g='git'
 alias ga='git add'
