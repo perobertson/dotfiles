@@ -22,6 +22,11 @@ if [ "$(command -v exa)" ]; then
     alias li="ll --icons"
 fi
 
+if [ "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp'
+fi
+
 # git
 alias g='git'
 alias ga='git add'
