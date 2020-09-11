@@ -43,7 +43,7 @@ py38:
   extends: .base_test
 
 py39:
-  image: python:3.9-alpine
+  image: python:3.9-rc-alpine
   extends: .base_test
 
 deploy_github:
