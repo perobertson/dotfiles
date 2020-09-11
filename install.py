@@ -3,7 +3,7 @@
 """Setup script for installing dotfiles on a new computer."""
 from __future__ import generator_stop
 
-import getopt
+import argparse
 import logging
 import subprocess
 import sys
@@ -196,43 +196,33 @@ def _fetch_submodules(script: Path, dry_run: bool = False) -> None:
         subprocess.run('git submodule update', shell=True, check=True, cwd=cwd)
 
 
-def main(script: Path, argv: list) -> None:
+def main() -> None:
     """Install the dotfiles and initialize submodules."""
-    try:
-        opts, args = getopt.getopt(argv, 'hv', ['dry-run', 'help', 'verbose'])
-    except getopt.GetoptError as e:
-        log.error(e)
-        _help()
-        sys.exit(1)
+    script_path = Path(sys.argv[0])
+    script = script_path.resolve()
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true", default=False)
+    parser.add_argument('--verbose', '-v', action='count', default=0)
+    args = parser.parse_args()
 
     # init logging first
-    level = 0
-    for opt, arg in opts:
-        if opt == '-v' or opt == '--verbose':
-            level += 1
-    if level == 1:
+    if args.verbose == 1:
         log.setLevel(logging.INFO)
-    elif level > 1:
+    elif args.verbose > 1:
         log.setLevel(logging.DEBUG)
 
-    dry_run = False
-    for opt, arg in opts:
-        if opt == '-h' or opt == '--help':
-            _help()
-            sys.exit(0)
-        elif opt == '--dry-run':
-            dry_run = True
-            log.setLevel(logging.DEBUG)
+    if args.dry_run:
+        log.setLevel(logging.DEBUG)
 
     log.debug('starting')
-    _fetch_submodules(script, dry_run=dry_run)
-    _install_dotfiles(script, dry_run=dry_run)
-    _install_oh_my_zsh(script, dry_run=dry_run)
-    _install_configs(script, dry_run=dry_run)
-    _install_ssh_config(script, dry_run=dry_run)
+    _fetch_submodules(script, dry_run=args.dry_run)
+    _install_dotfiles(script, dry_run=args.dry_run)
+    _install_oh_my_zsh(script, dry_run=args.dry_run)
+    _install_configs(script, dry_run=args.dry_run)
+    _install_ssh_config(script, dry_run=args.dry_run)
     print(maybe_colored('work complete', 'green'))
 
 
 if __name__ == '__main__':
-    script_path = Path(sys.argv[0])
-    main(script_path.resolve(), sys.argv[1:])
+    main()
