@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """Setup script for installing dotfiles on a new computer."""
-
 from __future__ import generator_stop
 
 import getopt
@@ -48,12 +47,12 @@ def _link_file(link, target, dry_run=False, backup=False):
     :param target:  the target that the link points to
     :type target:   pathlib.Path
     """
-    log.info("linking file '{}' -> '{}'".format(link, target))
+    log.info(f"linking file '{link}' -> '{target}'")
     if not dry_run:
         if backup:
             link_uri = link.resolve()
-            backup_uri = "{}.bak".format(link_uri)
-            log.info("created backup '{}'".format(backup_uri))
+            backup_uri = f"{link_uri}.bak"
+            log.info(f"created backup '{backup_uri}'")
             link.replace(backup_uri)
         link.symlink_to(target, target_is_directory=target.is_dir())
 
@@ -66,8 +65,8 @@ def _install_gitconfig(script, dry_run=False):
     """
     global_config_file = Path('~').joinpath('.gitconfig').expanduser()
     source_config_file = script.parent.joinpath('dotfiles').joinpath('gitconfig')
-    include_path = "path = {}".format(source_config_file.resolve())
-    new_content = "[include]\n\t{}".format(include_path)
+    include_path = f"path = {source_config_file.resolve()}"
+    new_content = f"[include]\n\t{include_path}"
 
     if global_config_file.exists():
         log.debug('global gitconfig exists')
@@ -79,7 +78,7 @@ def _install_gitconfig(script, dry_run=False):
                 with global_config_file.open(mode='a') as f:
                     print(new_content, file=f)
     else:
-        log.info("creating {}".format(global_config_file))
+        log.info(f"creating {global_config_file}")
         if not dry_run:
             with global_config_file.open(mode='w') as f:
                 print(new_content, file=f)
@@ -108,12 +107,12 @@ def _install_dotfiles(script, dry_run=False):
     dotfiles = script.parent.joinpath('dotfiles')
     for f in dotfiles.iterdir():
         if f.name in to_skip:
-            log.debug("skipping: {}".format(f.name))
+            log.debug(f"skipping: {f.name}")
             continue
-        home_dir_file = Path('~').joinpath(".{}".format(f.name)).expanduser()
+        home_dir_file = Path('~').joinpath(f".{f.name}").expanduser()
         if home_dir_file.exists():
             if f.samefile(home_dir_file):
-                log.debug("identical {}".format(home_dir_file))
+                log.debug(f"identical {home_dir_file}")
             else:
                 _link_file(home_dir_file, f, dry_run=dry_run, backup=True)
         else:
@@ -139,24 +138,19 @@ def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False) -> Non
             is_link = config_file.is_symlink()
             is_same = (is_file or is_link) and config_file.samefile(target)
 
-            msg = "file://{}\n  is_file:{}\n  is_symlink:{}\n  samefile:{}".format(
-                config_file,
-                is_file,
-                is_link,
-                is_same,
-            )
+            msg = f"file://{config_file}\n  is_file:{is_file}\n  is_symlink:{is_link}\n  samefile:{is_same}"
             log.debug(msg)
 
             if is_same:
                 continue
 
             if is_file:
-                backup_uri = "{}.bak".format(config_file.resolve())
+                backup_uri = f"{config_file.resolve()}.bak"
                 backup_path = Path(backup_uri)
-                log.info("Creating backup: {}".format(backup_path))
+                log.info(f"Creating backup: {backup_path}")
                 if not dry_run:
                     config_file.replace(backup_path)
-            log.info("Creating link: {} -> {}".format(config_file, target))
+            log.info(f"Creating link: {config_file} -> {target}")
             if not dry_run:
                 config_file.symlink_to(target, target_is_directory=target.is_dir())
 
