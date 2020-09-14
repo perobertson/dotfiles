@@ -1,4 +1,7 @@
 {
+    "[dockerfile]": {
+        "editor.formatOnSave": false
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'Inconsolata Medium', 'Fira Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 18,
@@ -26,10 +29,10 @@
         "**/.terraform/**": true
     },
     "liveshare.guestApprovalRequired": true,
-    "python.formatting.provider": "autopep8",
+    "python.formatting.provider": "black",
     "python.linting.enabled": true,
     "python.linting.flake8Args": [
-        "--max-line-length=119"
+        "--max-line-length=88"
     ],
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
@@ -42,9 +45,10 @@
     "python.linting.pylintEnabled": false,
     "python.pythonPath": "/home/perobertson/Applications/pyenv/shims/python",
     "python.showStartPage": false,
-    "window.zoomLevel": 0.01,
+    "shellcheck.customArgs": [
+        "-x"
+    ],
+    "window.zoomLevel": 0,
     "workbench.colorTheme": "Monokai",
-    "[dockerfile]": {
-        "editor.formatOnSave": false
-    }
+    "workbench.startupEditor": "welcomePage"
 }
