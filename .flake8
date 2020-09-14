@@ -9,7 +9,7 @@
 ; FI17: __future__ import "generators" missing, enforced in 2.3
 ; FI18 __future__ import "annotations" missing, enforced in 4.0
 ; FI55 __future__ import "generator_stop" present, enforced in 3.7
-ignore = FI10,FI11,FI12,FI13,FI14,FI16,FI17,FI18,FI55
-
-import-order-style = pycharm
-max-line-length=120
+; W503 line break before binary operator
+ignore=FI10,FI11,FI12,FI13,FI14,FI16,FI17,FI18,FI55,W503
+import-order-style=pycharm
+max-line-length=88

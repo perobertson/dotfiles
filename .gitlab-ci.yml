@@ -25,10 +25,12 @@ lint:
         flake8-docstrings \
         flake8-future-import \
         flake8-import-order \
+        mypy \
         pep8-naming \
         pydocstyle
     - pip check
     - ~/.local/bin/flake8 --statistics install.py
+    - ~/.local/bin/mypy --strict install.py
 
 py36:
   image: python:3.6-alpine
