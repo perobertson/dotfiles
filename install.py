@@ -8,38 +8,31 @@ import logging
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Iterable, Optional
 
 try:
-    from termcolor import colored
-    maybe_colored = colored
+    from termcolor import colored as maybe_colored
 except ImportError:
+
     def maybe_colored(
         text: str,
         color: Optional[str] = None,
         on_color: Optional[str] = None,
-        attrs: Optional[str] = None,
+        attrs: Optional[Iterable[str]] = None,
     ) -> str:
         """Return the text without colouring it."""
         return text
 
-FORMAT = maybe_colored(
-    '%(asctime)-s %(levelname)-8s %(filename)s:%(lineno)s',
-    'cyan'
-) + maybe_colored(
-    ' %(funcName)s',
-    'yellow'
-) + ' %(message)s'
-logging.basicConfig(format=FORMAT)
+
 log = logging.getLogger(__name__)
 
 
-def _help():
-    """Print the help message."""
-    print('install.py [-h|--help] [-v|--verbose] [--dry-run]')
-
-
-def _link_file(link, target, dry_run=False, backup=False):
+def _link_file(
+    link: Path,
+    target: Path,
+    dry_run: bool = False,
+    backup: bool = False,
+) -> None:
     """Create a symlink at link to target.
 
     :param link:    the name of the link to create
@@ -57,59 +50,59 @@ def _link_file(link, target, dry_run=False, backup=False):
         link.symlink_to(target, target_is_directory=target.is_dir())
 
 
-def _install_gitconfig(script, dry_run=False):
+def _install_gitconfig(script: Path, dry_run: bool = False) -> None:
     """Install the global gitconfig file.
 
     This file is special because we want some sections to be untracked.
     Use include to handle this case https://git-scm.com/docs/git-config#_includes
     """
-    global_config_file = Path('~').joinpath('.gitconfig').expanduser()
-    source_config_file = script.parent.joinpath('dotfiles').joinpath('gitconfig')
+    global_config_file = Path("~").joinpath(".gitconfig").expanduser()
+    source_config_file = script.parent.joinpath("dotfiles").joinpath("gitconfig")
     include_path = f"path = {source_config_file.resolve()}"
     new_content = f"[include]\n\t{include_path}"
 
     if global_config_file.exists():
-        log.debug('global gitconfig exists')
+        log.debug("global gitconfig exists")
         with global_config_file.open() as f:
             content = f.read()
         if include_path not in content:
             log.info("\tappending include section")
             if not dry_run:
-                with global_config_file.open(mode='a') as f:
+                with global_config_file.open(mode="a") as f:
                     print(new_content, file=f)
     else:
         log.info(f"creating {global_config_file}")
         if not dry_run:
-            with global_config_file.open(mode='w') as f:
+            with global_config_file.open(mode="w") as f:
                 print(new_content, file=f)
 
 
-def _install_dotfiles(script, dry_run=False):
+def _install_dotfiles(script: Path, dry_run: bool = False) -> None:
     """Install the dotfiles.
 
     :param script: Path object to this file
     :type script: pathlib.Path
     :param dry_run: True if the commands should be displayed instead of executed
     """
-    log.info('Installing dotfiles')
+    log.info("Installing dotfiles")
     to_skip = {
-        '.git',
-        '.gitignore',
-        '.gitmodules',
-        'gitconfig',
-        'install.py',
-        'LICENSE',
-        'Rakefile',
-        'README.md',
-        'README.rdoc',
+        ".git",
+        ".gitignore",
+        ".gitmodules",
+        "gitconfig",
+        "install.py",
+        "LICENSE",
+        "Rakefile",
+        "README.md",
+        "README.rdoc",
     }
     script.joinpath
-    dotfiles = script.parent.joinpath('dotfiles')
+    dotfiles = script.parent.joinpath("dotfiles")
     for f in dotfiles.iterdir():
         if f.name in to_skip:
             log.debug(f"skipping: {f.name}")
             continue
-        home_dir_file = Path('~').joinpath(f".{f.name}").expanduser()
+        home_dir_file = Path("~").joinpath(f".{f.name}").expanduser()
         if home_dir_file.exists():
             if f.samefile(home_dir_file):
                 log.debug(f"identical {home_dir_file}")
@@ -138,7 +131,12 @@ def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False) -> Non
             is_link = config_file.is_symlink()
             is_same = (is_file or is_link) and config_file.samefile(target)
 
-            msg = f"file://{config_file}\n  is_file:{is_file}\n  is_symlink:{is_link}\n  samefile:{is_same}"
+            msg = (
+                f"file://{config_file}\n"
+                f"  is_file:{is_file}\n"
+                f"  is_symlink:{is_link}\n"
+                f"  samefile:{is_same}"
+            )
             log.debug(msg)
 
             if is_same:
@@ -155,45 +153,65 @@ def _link_files(local_dir: Path, target_dir: Path, dry_run: bool = False) -> Non
                 config_file.symlink_to(target, target_is_directory=target.is_dir())
 
 
-def _install_configs(script, dry_run=False):
+def _install_configs(script: Path, dry_run: bool = False) -> None:
     """Create symlinks in the home config to the dotfiles project."""
-    log.info('Installing .config')
-    config_dir = Path('~').joinpath('.config').expanduser()
-    target_configs = script.parent.joinpath('config')
+    log.info("Installing .config")
+    config_dir = Path("~").joinpath(".config").expanduser()
+    target_configs = script.parent.joinpath("config")
     _link_files(config_dir, target_configs, dry_run=dry_run)
 
 
-def _install_ssh_config(script, dry_run=False):
+def _install_ssh_config(script: Path, dry_run: bool = False) -> None:
     """Install default ssh configs."""
-    log.info('Installing .ssh')
-    config_dir = Path('~').joinpath('.ssh').expanduser()
-    target_configs = script.parent.joinpath('ssh')
+    log.info("Installing .ssh")
+    config_dir = Path("~").joinpath(".ssh").expanduser()
+    target_configs = script.parent.joinpath("ssh")
     _link_files(config_dir, target_configs, dry_run=dry_run)
 
 
-def _install_oh_my_zsh(script, dry_run=False):
+def _install_oh_my_zsh(script: Path, dry_run: bool = False) -> None:
     log.info("Installing oh-my-zsh")
-    zsh_path = Path('~/.oh-my-zsh').expanduser()
+    zsh_path = Path("~/.oh-my-zsh").expanduser()
     if zsh_path.exists():
         log.debug("oh-my-zsh is already installed")
     elif not dry_run:
-        cmd = 'git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"'
+        cmd = (
+            'git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"'
+        )
         subprocess.run(cmd, shell=True, check=True)
 
-    zsh_custom_path = zsh_path.joinpath('custom')
-    target_configs = script.parent.joinpath('zsh_custom')
+    zsh_custom_path = zsh_path.joinpath("custom")
+    target_configs = script.parent.joinpath("zsh_custom")
     _link_files(zsh_custom_path, target_configs, dry_run=dry_run)
 
 
 def _fetch_submodules(script: Path, dry_run: bool = False) -> None:
-    log.info('initializing submodules')
+    log.info("initializing submodules")
     if dry_run:
-        log.debug('git submodule init')
-        log.debug('git submodule update')
+        log.debug("git submodule init")
+        log.debug("git submodule update")
     else:
         cwd = str(script.parent.resolve())
-        subprocess.run('git submodule init', shell=True, check=True, cwd=cwd)
-        subprocess.run('git submodule update', shell=True, check=True, cwd=cwd)
+        subprocess.run("git submodule init", shell=True, check=True, cwd=cwd)
+        subprocess.run("git submodule update", shell=True, check=True, cwd=cwd)
+
+
+def _init_logging(args: argparse.Namespace) -> None:
+    """Initialise the logger."""
+    log_fmt = (
+        maybe_colored("%(asctime)-s", "magenta")
+        + maybe_colored(" %(levelname)-8s", "white")
+        + maybe_colored(" %(name)s:%(lineno)s", "cyan")
+        + maybe_colored("(%(funcName)s)", "yellow")
+        + " %(message)s"
+    )
+    logging.basicConfig(format=log_fmt)
+    if args.dry_run:
+        log.setLevel(logging.DEBUG)
+    elif args.verbose == 1:
+        log.setLevel(logging.INFO)
+    elif args.verbose > 1:
+        log.setLevel(logging.DEBUG)
 
 
 def main() -> None:
@@ -203,26 +221,19 @@ def main() -> None:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", default=False)
-    parser.add_argument('--verbose', '-v', action='count', default=0)
+    parser.add_argument("--verbose", "-v", action="count", default=0)
     args = parser.parse_args()
 
-    # init logging first
-    if args.verbose == 1:
-        log.setLevel(logging.INFO)
-    elif args.verbose > 1:
-        log.setLevel(logging.DEBUG)
+    _init_logging(args)
 
-    if args.dry_run:
-        log.setLevel(logging.DEBUG)
-
-    log.debug('starting')
+    log.debug("starting")
     _fetch_submodules(script, dry_run=args.dry_run)
     _install_dotfiles(script, dry_run=args.dry_run)
     _install_oh_my_zsh(script, dry_run=args.dry_run)
     _install_configs(script, dry_run=args.dry_run)
     _install_ssh_config(script, dry_run=args.dry_run)
-    print(maybe_colored('work complete', 'green'))
+    print(maybe_colored("work complete", "green"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
