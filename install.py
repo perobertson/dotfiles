@@ -58,23 +58,23 @@ def _install_gitconfig(script: Path, dry_run: bool = False) -> None:
     """
     global_config_file = Path("~").joinpath(".gitconfig").expanduser()
     source_config_file = script.parent.joinpath("dotfiles").joinpath("gitconfig")
-    include_path = f"path = {source_config_file.resolve()}"
-    new_content = f"[include]\n\t{include_path}"
+    include_config_path = f"path = {source_config_file.resolve()}"
+    include_config = f"[include]\n\t{include_config_path}"
 
     if global_config_file.exists():
         log.debug("global gitconfig exists")
         with global_config_file.open() as f:
             content = f.read()
-        if include_path not in content:
+        if include_config_path not in content:
             log.info("\tappending include section")
             if not dry_run:
                 with global_config_file.open(mode="a") as f:
-                    print(new_content, file=f)
+                    print(include_config, file=f)
     else:
         log.info(f"creating {global_config_file}")
         if not dry_run:
             with global_config_file.open(mode="w") as f:
-                print(new_content, file=f)
+                print(include_config, file=f)
 
 
 def _install_dotfiles(script: Path, dry_run: bool = False) -> None:
