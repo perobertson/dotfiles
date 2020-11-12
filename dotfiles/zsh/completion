@@ -9,3 +9,8 @@ zstyle ':completion:*' insert-tab pending
 
 # completion style for makefiles
 zstyle ':completion:*:*:make:*' tag-order 'targets'
+
+# Set up terraform autocomplete
+if [[ -x "$(command -v terraform)" ]]; then
+  complete -o nospace -C "$HOME/Applications/tfenv/bin/terraform" terraform
+fi
