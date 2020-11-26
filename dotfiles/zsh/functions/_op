@@ -6,6 +6,8 @@ function _op {
 
   _arguments -C \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '(-h --help)'{-h,--help}'[get help for op]' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
@@ -30,7 +32,7 @@ function _op {
       "signin:Sign in to a 1Password account"
       "signout:Sign out of a 1Password account"
       "suspend:Suspend a user"
-      "update:Check for updates"
+      "update:Check for and download updates"
     )
     _describe "command" commands
     ;;
@@ -98,6 +100,8 @@ function _op_add {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with add]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -126,6 +130,8 @@ function _op_add_group {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with add group]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -134,6 +140,8 @@ function _op_add_user {
     '(-h --help)'{-h,--help}'[get help with add user]' \
     '--role[set the user'\''s `role` in a group (member or manager) (default "member")]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -141,6 +149,8 @@ function _op_completion {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with completion]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -149,6 +159,8 @@ function _op_confirm {
     '--all[confirm all unconfirmed users]' \
     '(-h --help)'{-h,--help}'[get help with confirm]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -159,6 +171,8 @@ function _op_create {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with create]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -197,12 +211,14 @@ function _op_create {
 
 function _op_create_document {
   _arguments \
-    '--file-name[set the file'\''s `name`]:' \
+    '--filename[set the file'\''s `name`]:' \
     '(-h --help)'{-h,--help}'[get help with create document]' \
     '--tags[add one or more `tags` (comma-separated) to the item]:' \
     '--title[set the item'\''s `title`]:' \
     '--vault[save the document in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -211,6 +227,8 @@ function _op_create_group {
     '--description[set the group'\''s `description`]:' \
     '(-h --help)'{-h,--help}'[get help with create group]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -223,6 +241,8 @@ function _op_create_item {
     '--url[set the `URL` associated with the item]:' \
     '--vault[save the item in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -231,6 +251,8 @@ function _op_create_user {
     '(-h --help)'{-h,--help}'[get help with create user]' \
     '--language[set the user'\''s account `language`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -240,6 +262,8 @@ function _op_create_vault {
     '--description[set the group'\''s `description`]:' \
     '(-h --help)'{-h,--help}'[get help with create vault]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -250,6 +274,8 @@ function _op_delete {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with delete]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -295,6 +321,8 @@ function _op_delete_document {
     '(-h --help)'{-h,--help}'[get help with delete document]' \
     '--vault[look for the document in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -302,6 +330,8 @@ function _op_delete_group {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with delete group]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -310,6 +340,8 @@ function _op_delete_item {
     '(-h --help)'{-h,--help}'[get help with delete item]' \
     '--vault[look for the item in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -317,6 +349,8 @@ function _op_delete_trash {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with delete trash]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -324,6 +358,8 @@ function _op_delete_user {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with delete user]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -331,6 +367,8 @@ function _op_delete_vault {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with delete vault]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -341,6 +379,8 @@ function _op_edit {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with edit]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -348,15 +388,20 @@ function _op_edit {
   case $state in
   cmnds)
     commands=(
+      "document:Edit a document"
       "group:Edit a group's name or description"
       "item:Edit an item's details"
       "user:Edit a user's name or Travel Mode status"
+      "vault:Edit a vault's name"
     )
     _describe "command" commands
     ;;
   esac
 
   case "$words[1]" in
+  document)
+    _op_edit_document
+    ;;
   group)
     _op_edit_group
     ;;
@@ -366,7 +411,23 @@ function _op_edit {
   user)
     _op_edit_user
     ;;
+  vault)
+    _op_edit_vault
+    ;;
   esac
+}
+
+function _op_edit_document {
+  _arguments \
+    '--filename[set the file'\''s `name`]:' \
+    '(-h --help)'{-h,--help}'[get help with edit document]' \
+    '--tags[add one or more `tags` (comma-separated) to the item]:' \
+    '--title[set the item'\''s `title`]:' \
+    '--vault[look up document in this `vault`]:' \
+    '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
+    '--session[authenticate with this session `token`]:'
 }
 
 function _op_edit_group {
@@ -375,6 +436,8 @@ function _op_edit_group {
     '(-h --help)'{-h,--help}'[get help with edit group]' \
     '--name[change the group'\''s `name`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -384,6 +447,8 @@ function _op_edit_item {
     '(-h --help)'{-h,--help}'[get help with edit item]' \
     '--vault[look for the item in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -393,6 +458,18 @@ function _op_edit_user {
     '--name[set the user'\''s `name`]:' \
     '--travelmode[turn Travel Mode on or off for the user]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
+    '--session[authenticate with this session `token`]:'
+}
+
+function _op_edit_vault {
+  _arguments \
+    '(-h --help)'{-h,--help}'[get help with edit vault]' \
+    '--name[change the vault'\''s `name`]:' \
+    '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -400,6 +477,8 @@ function _op_encode {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with encode]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -407,6 +486,8 @@ function _op_forget {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with forget]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -417,6 +498,8 @@ function _op_get {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with get]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -469,6 +552,8 @@ function _op_get_account {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with get account]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -479,6 +564,8 @@ function _op_get_document {
     '--output[save the document to the file `path` instead of stdout]:' \
     '--vault[look for the document in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -486,6 +573,8 @@ function _op_get_group {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with get group]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -498,6 +587,8 @@ function _op_get_item {
     '--share-link[get a shareable link for the item]' \
     '--vault[look for the item in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -505,6 +596,8 @@ function _op_get_template {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with get template]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -513,6 +606,8 @@ function _op_get_totp {
     '(-h --help)'{-h,--help}'[get help with get totp]' \
     '--vault[look for the item in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -522,6 +617,8 @@ function _op_get_user {
     '(-h --help)'{-h,--help}'[get help with get user]' \
     '--publickey[get the user'\''s public key]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -529,12 +626,16 @@ function _op_get_vault {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with get vault]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
 function _op_help {
   _arguments \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -545,6 +646,8 @@ function _op_list {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with list]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -595,6 +698,8 @@ function _op_list_documents {
     '--include-trash[include documents in the Trash]' \
     '--vault[only list documents in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -604,14 +709,19 @@ function _op_list_events {
     '(-h --help)'{-h,--help}'[get help with list events]' \
     '--older[list events from before the specified event]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
 function _op_list_groups {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with list groups]' \
-    '--vault[list groups who have direct access to this `vault`]:' \
+    '--user[list groups that a `user` belongs to]:' \
+    '--vault[list groups that have direct access to a `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -623,6 +733,8 @@ function _op_list_items {
     '*--tags[only list items with these `tags` (comma-separated)]:' \
     '--vault[only list items in this `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -630,6 +742,8 @@ function _op_list_templates {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with list templates]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -639,6 +753,8 @@ function _op_list_users {
     '(-h --help)'{-h,--help}'[get help with list users]' \
     '--vault[list users who have direct access to `vault`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -646,7 +762,10 @@ function _op_list_vaults {
   _arguments \
     '--group[list vaults a `group` has access to]:' \
     '(-h --help)'{-h,--help}'[get help with list vaults]' \
+    '--user[list vaults a `user` has access to]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -654,6 +773,8 @@ function _op_reactivate {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with reactivate]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -664,6 +785,8 @@ function _op_remove {
   _arguments -C \
     '(-h --help)'{-h,--help}'[get help with remove]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:' \
     "1: :->cmnds" \
     "*::arg:->args"
@@ -692,6 +815,8 @@ function _op_remove_group {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with remove group]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -699,6 +824,8 @@ function _op_remove_user {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with remove user]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -708,6 +835,8 @@ function _op_signin {
     '(-r --raw)'{-r,--raw}'[only return the session token]' \
     '--shorthand[set the short account `name`]:' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -716,6 +845,8 @@ function _op_signout {
     '--forget[remove the details for a 1Password account from this device]' \
     '(-h --help)'{-h,--help}'[get help with signout]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
@@ -723,13 +854,18 @@ function _op_suspend {
   _arguments \
     '(-h --help)'{-h,--help}'[get help with suspend]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
 function _op_update {
   _arguments \
+    '--directory[download the update to this `path`]:' \
     '(-h --help)'{-h,--help}'[get help with update]' \
     '--account[use the account with this `shorthand`]:' \
+    '--cache[store and use cached information]' \
+    '--config[use this configuration `directory`]:' \
     '--session[authenticate with this session `token`]:'
 }
 
