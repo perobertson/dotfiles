@@ -32,13 +32,6 @@ if [[ "$DOTFILES_PATH" = '' ]]; then
     export DOTFILES_PATH=1
 fi
 
-# op config defaulted to ~/.op/ instead of the default config directory
-export OP_CONFIG_DIR="${XDG_CONFIG_HOME:=${HOME}/.config}/op"
-if [[ ! -d "${OP_CONFIG_DIR}" ]]; then
-    mkdir -p "${OP_CONFIG_DIR}"
-    chmod '0700' "${OP_CONFIG_DIR}"
-fi
-
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 fpath=($HOME/.zsh/functions $fpath)
