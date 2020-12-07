@@ -52,6 +52,11 @@ if [[ -x "$(command -v rbenv)" ]]; then
   eval "$(rbenv init -)"
 fi
 
+# Set up zoxide
+if [[ -x "$(command -v zoxide)" ]]; then
+  eval "$(zoxide init zsh)"
+fi
+
 # Set up aws completions
 if [[ -x "$(command -v aws_zsh_completer.sh)" ]]; then
   source "$(command -v aws_zsh_completer.sh)"
