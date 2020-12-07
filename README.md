@@ -25,23 +25,24 @@ I normally place all of my coding projects in `~/workspace`.
 This directory can easily be accessed (and tab completed) with the "c" command.
 This can be configured by exporting `CODE_PATH` from the .localrc file.
 
-```
+```text
 c re<tab>
 ```
 
 There is also an "h" command which behaves similar, but acts on the
 home path.
 
-```
+```text
 h doc<tab>
 ```
 
 Tab completion is also added to rake and cap commands:
 
-```
+```text
 rake db:mi<tab>
 cap de<tab>
 ```
+
 To speed things up, the results are cached in local `.rake_tasks~` and
 `.cap_tasks~`. It is smart enough to expire the cache automatically in
 most cases, but you can simply remove the files to flush the cache.
