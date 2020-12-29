@@ -2,6 +2,12 @@
     "[dockerfile]": {
         "editor.formatOnSave": false
     },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[terraform]": {
+        "editor.tabSize": 2
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'Inconsolata Medium', 'Fira Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 18,
