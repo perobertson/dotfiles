@@ -166,6 +166,8 @@ def _install_ssh_config(script: Path, dry_run: bool = False) -> None:
     log.info("Installing .ssh")
     config_dir = Path("~").joinpath(".ssh").expanduser()
     target_configs = script.parent.joinpath("ssh")
+    # fix the permissions on the config file since git always clones with group access
+    target_configs.joinpath('config').chmod(0o0600)
     _link_files(config_dir, target_configs, dry_run=dry_run)
 
 
