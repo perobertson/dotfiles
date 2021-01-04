@@ -23,3 +23,5 @@
 	config = false
 [push]
 	default = simple
+[tag]
+	gpgSign = true
