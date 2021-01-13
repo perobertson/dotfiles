@@ -1,0 +1,8 @@
+if [[ "$(git rev-parse --show-toplevel 2>/dev/null)" != "" ]]; then
+    if [[ ! -d "$(git rev-parse --show-toplevel)/.gitignore.d" ]]; then
+        mkdir "$(git rev-parse --show-toplevel)/.gitignore.d"
+    fi
+        code "$(git rev-parse --show-toplevel)/.gitignore.d/Notes.md"
+    else
+    code "${CODE_PATH:-${HOME}/workspace}/Notes.md"
+fi

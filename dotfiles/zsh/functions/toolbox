@@ -1,0 +1,2 @@
+docker run --rm -itv "$(pwd):/opt/toolbox" -w /opt/toolbox \
+    "$(source /etc/os-release && echo "${ID}:${VERSION_ID}")" bash
