@@ -1,0 +1,81 @@
+# https://starship.rs/config/
+[username]
+show_always=true
+format="[$user](purple)"
+
+[hostname]
+ssh_only=false
+format="[@](cyan)[$hostname](yellow)[:](red)"
+
+[directory]
+truncation_length=0
+format="[$path]($style)[$read_only]($read_only_style)[|](bold red)"
+style="cyan"
+
+[git_branch]
+format="[$symbol$branch]($style)"
+style="green"
+
+[git_status]
+format="([$all_status$ahead_behind]($style))[|](bold red)"
+
+[nodejs]
+format="[$symbol$version]($style)[|](bold red)"
+style="green"
+
+[package]
+format="[$symbol$version]($style)[|](bold red)"
+style="208"
+
+[python]
+pyenv_version_name=true
+format="[${symbol}${version}( ($virtualenv))]($style)[|](bold red)"
+style="yellow"
+
+[rust]
+format="[$symbol$version]($style)[|](bold red)"
+
+[terraform]
+format="[$symbol$workspace]($style)[|](bold red)"
+style="105"
+
+[aws]
+format='[$symbol$profile(\($region\))]($style)[|](bold red)'
+style="yellow"
+
+[[battery.display]]  # capacity between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # capacity between 10% and 25%
+threshold = 25
+style = "red"
+
+[[battery.display]]  # capacity between 25% and 50%
+threshold = 50
+style = "bold yellow"
+
+[[battery.display]]  # capacity between 50% and 80%
+threshold = 80
+style = "yellow"
+
+[[battery.display]]  # capacity between 80% and 95%
+threshold = 95
+style = "green"
+
+[time]
+disabled=false
+format="[$time]($style)"
+style="grey"
+
+[custom.ope]
+command = "echo $OPE_ENV"
+when = """ test "$OPE" -eq 1 """
+format = "[$symbol$output]($style)[|](bold red)"
+symbol="ope: "
+
+[custom.sedo]
+command = "echo $SEDO_ENV"
+when = """ test "$SEDO" -eq 1 """
+format = "[$symbol$output]($style)[|](bold red)"
+symbol="sedo: "

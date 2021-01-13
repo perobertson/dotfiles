@@ -62,6 +62,11 @@ if [[ -x "$(command -v aws_zsh_completer.sh)" ]]; then
   source "$(command -v aws_zsh_completer.sh)"
 fi
 
+# Configure prompt
+if [[ -x "$(command -v starship)" ]]; then
+  eval "$(starship init zsh)"
+fi
+
 # Display MotD
 if [[ -f /etc/motd ]]; then
   if [[ -f "${HOME}/.config/dotfiles/motd_check" ]]; then
