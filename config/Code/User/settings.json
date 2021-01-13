@@ -24,6 +24,7 @@
     ],
     "editor.autoIndent": "advanced",
     "explorer.autoReveal": false,
+    "explorer.confirmDragAndDrop": false,
     "files.associations": {
         ".localrc": "shellscript",
         "*.make": "makefile",
@@ -65,5 +66,11 @@
     },
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Monokai",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "workbench.startupEditor": "welcomePage"
 }
