@@ -5,19 +5,19 @@ format="[$user](purple)"
 
 [hostname]
 ssh_only=false
-format="[@](cyan)[$hostname](yellow)[:](red)"
+format="[@](cyan)[$hostname](yellow)[:](bold red)"
 
 [directory]
 truncation_length=0
-format="[$path]($style)[$read_only]($read_only_style)[|](bold red)"
+format="[$path]($style)[$read_only]($read_only_style) "
 style="cyan"
 
 [git_branch]
-format="[$symbol$branch]($style)"
+format="([$symbol$branch]($style)[|](bold red))"
 style="green"
 
 [git_status]
-format="([$all_status$ahead_behind]($style))[|](bold red)"
+format="([$all_status$ahead_behind]($style)[|](bold red))"
 
 [nodejs]
 format="[$symbol$version]($style)[|](bold red)"
