@@ -47,20 +47,20 @@ style="yellow"
 threshold = 10
 style = "bold red"
 
-[[battery.display]]  # capacity between 10% and 25%
-threshold = 25
+[[battery.display]]  # capacity between 10% and 20%
+threshold = 20
 style = "red"
 
-[[battery.display]]  # capacity between 25% and 50%
-threshold = 50
+[[battery.display]]  # capacity between 20% and 30%
+threshold = 30
 style = "bold yellow"
+
+[[battery.display]]  # capacity between 30% and 50%
+threshold = 50
+style = "yellow"
 
 [[battery.display]]  # capacity between 50% and 80%
 threshold = 80
-style = "yellow"
-
-[[battery.display]]  # capacity between 80% and 95%
-threshold = 95
 style = "green"
 
 [time]
