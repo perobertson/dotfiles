@@ -34,8 +34,6 @@ if [[ "$DOTFILES_PATH" = '' ]]; then
     export DOTFILES_PATH=1
 fi
 
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-
 fpath=($HOME/.zsh/functions $fpath)
 
 autoload -U $HOME/.zsh/functions/*(:t)
