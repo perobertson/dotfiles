@@ -28,7 +28,8 @@
     "files.associations": {
         ".localrc": "shellscript",
         "*.make": "makefile",
-        "*.mk": "makefile"
+        "*.mk": "makefile",
+        "rust-toolchain": "toml"
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -37,6 +38,7 @@
     },
     "liveshare.guestApprovalRequired": true,
     "python.formatting.provider": "black",
+    "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length=88"
@@ -52,6 +54,7 @@
     "python.linting.pylintEnabled": false,
     "python.pythonPath": "/home/perobertson/Applications/pyenv/shims/python",
     "python.showStartPage": false,
+    "search.mode": "newEditor",
     "shellcheck.customArgs": [
         "-x"
     ],
@@ -64,13 +67,9 @@
         "maxNumberOfProblems": 100,
         "trace.server": "off"
     },
+    "todo-tree.tree.showScanModeButton": false,
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Monokai",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": [],
     "workbench.startupEditor": "welcomePage"
 }
