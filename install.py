@@ -182,10 +182,6 @@ def _install_oh_my_zsh(script: Path, dry_run: bool = False) -> None:
         )
         subprocess.run(cmd, shell=True, check=True)
 
-    zsh_custom_path = zsh_path.joinpath("custom")
-    target_configs = script.parent.joinpath("zsh_custom")
-    _link_files(zsh_custom_path, target_configs, dry_run=dry_run)
-
 
 def _fetch_submodules(script: Path, dry_run: bool = False) -> None:
     log.info("initializing submodules")
