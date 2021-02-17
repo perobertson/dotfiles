@@ -32,20 +32,24 @@ lint:
     - ~/.local/bin/flake8 --statistics install.py
     - ~/.local/bin/mypy --strict install.py
 
-py36:
+py3.6:
   image: python:3.6-alpine
   extends: .base_test
 
-py37:
+py3.7:
   image: python:3.7-alpine
   extends: .base_test
 
-py38:
+py3.8:
   image: python:3.8-alpine
   extends: .base_test
 
-py39:
-  image: python:3.9-rc-alpine
+py3.9:
+  image: python:3.9-alpine
+  extends: .base_test
+
+py3.10:
+  image: python:3.10-rc-alpine
   extends: .base_test
 
 deploy_github:
