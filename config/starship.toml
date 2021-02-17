@@ -19,6 +19,9 @@ style="green"
 [git_status]
 format="([$all_status$ahead_behind]($style)[|](bold red))"
 
+[golang]
+format="via [$symbol($version)]($style)[|](bold red)"
+
 [nodejs]
 format="[$symbol$version]($style)[|](bold red)"
 style="green"
