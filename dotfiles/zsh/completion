@@ -14,3 +14,11 @@ zstyle ':completion:*' insert-tab pending
 
 # completion style for makefiles
 zstyle ':completion:*:*:make:*' tag-order 'targets'
+
+# Completions for pip
+if [[ -x $(command -v pip) ]]; then
+    compctl -K _pip_completion pip
+fi
+if [[ -x $(command -v pip3) ]]; then
+    compctl -K _pip_completion pip3
+fi
