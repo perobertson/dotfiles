@@ -34,7 +34,7 @@ if [[ "$DOTFILES_PATH" = '' ]]; then
     export DOTFILES_PATH=1
 fi
 
-fpath=($HOME/.zsh/functions $fpath)
+fpath=($HOME/.zsh/functions /usr/local/share/zsh/vendor-completions /usr/share/zsh/vendor-completions $fpath)
 
 autoload -U $HOME/.zsh/functions/*(:t)
 
