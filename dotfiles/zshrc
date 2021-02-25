@@ -4,6 +4,11 @@ ZSH="${ZSH:-$HOME/.oh-my-zsh}"
 # Initialise oh-my-zsh
 source "$ZSH/oh-my-zsh.sh"
 
+# Load all config files
+for config_file ($HOME/.zsh/lib/*.zsh); do
+  [ -f "${config_file}" ] && source "${config_file}"
+done
+
 # Customize to your needs...
 source "$HOME/.zsh/config.zsh"
 source "$HOME/.zsh/aliases.zsh"

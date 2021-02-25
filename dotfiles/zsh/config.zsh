@@ -62,11 +62,3 @@ setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE  # don't record commands that start with a space
 setopt menu_complete
-
-# Use 'bindkey' to list all bound keys
-# Use 'cat -v' to discover the codes for key combinations
-bindkey '^[[1;5C' forward-word  # ctrl+right
-bindkey '^[[1;5D' backward-word  # ctrl+left
-bindkey '^[[3~' delete-char  # delete
-bindkey '^[[F' end-of-line  # end (fn+right)
-bindkey '^[[H' beginning-of-line  # home (fn+left)
