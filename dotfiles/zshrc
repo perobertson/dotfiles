@@ -11,7 +11,6 @@ done
 
 # Customize to your needs...
 source "$HOME/.zsh/config.zsh"
-source "$HOME/.zsh/completion.zsh"
 
 # Display MotD
 motd
