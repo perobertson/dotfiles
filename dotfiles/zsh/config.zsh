@@ -1,8 +1,3 @@
-export EDITOR='vim'
-export CODE_PATH="$HOME/workspace"
-GPG_TTY=$(tty)
-export GPG_TTY
-
 fpath=($HOME/.zsh/functions /usr/local/share/zsh/vendor-completions /usr/share/zsh/vendor-completions $fpath)
 
 autoload -U $HOME/.zsh/functions/*(:t)
