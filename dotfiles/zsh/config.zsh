@@ -1,7 +1,3 @@
-fpath=($HOME/.zsh/functions /usr/local/share/zsh/vendor-completions /usr/share/zsh/vendor-completions $fpath)
-
-autoload -U $HOME/.zsh/functions/*(:t)
-
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000

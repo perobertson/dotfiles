@@ -1,6 +1,3 @@
-autoload -U compinit
-compinit
-
 # use 'zstyle -L' to see all configured entries
 
 # menu selecting
@@ -47,3 +44,10 @@ fi
 if [[ -x "$(command -v starship)" ]]; then
   eval "$(starship init zsh)"
 fi
+
+# Configure the directories to look for functions in
+fpath=($HOME/.zsh/functions /usr/local/share/zsh/vendor-completions /usr/share/zsh/vendor-completions $fpath)
+# Autoload the functions so they can be executed when called
+autoload -Uz $HOME/.zsh/functions/*(:t) compinit
+# Initialise the completions
+compinit
