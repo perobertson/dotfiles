@@ -5,6 +5,12 @@
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust"
+    },
     "[terraform]": {
         "editor.tabSize": 2
     },
@@ -32,12 +38,16 @@
     "explorer.autoReveal": false,
     "explorer.confirmDragAndDrop": false,
     "files.associations": {
+        ".ansible-lint": "yaml",
         ".localrc": "shellscript",
+        ".yamllint": "yaml",
         "*.make": "makefile",
         "*.mk": "makefile",
         "rust-toolchain": "toml"
     },
     "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.terraform/**": true
     },
@@ -78,6 +88,11 @@
     "todo-tree.tree.showScanModeButton": false,
     "workbench.colorTheme": "Monokai",
     "workbench.editor.highlightModifiedTabs": true,
-    "workbench.editorAssociations": [],
-    "workbench.startupEditor": "welcomePage"
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "workbench.startupEditor": "newUntitledFile"
 }
