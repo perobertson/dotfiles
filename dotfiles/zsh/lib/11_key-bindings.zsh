@@ -21,6 +21,7 @@ bindkey -e
 
 # Use 'bindkey' to list all bound keys
 # Use 'cat -v' to discover the codes for key combinations
+
 bindkey '^[[1;5C' forward-word  # [Ctrl-RightArrow]
 bindkey '^[[1;5D' backward-word  # [Ctrl-LeftArrow]
 bindkey '^r' history-incremental-search-backward  # [Ctrl-r]
