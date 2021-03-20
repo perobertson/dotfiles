@@ -1,5 +1,11 @@
 # use 'zstyle -L' to see all configured entries
 
+# man zshparam
+# A list of non-alphanumeric characters
+# considered part of a word by the line editor
+# WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>
+WORDCHARS=''
+
 # menu selecting
 zstyle ':completion:*:*:*:*:*' menu select
 
