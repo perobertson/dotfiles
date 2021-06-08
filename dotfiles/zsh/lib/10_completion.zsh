@@ -26,16 +26,6 @@ if [[ -x $(command -v pip3) ]]; then
     compctl -K _pip_completion pip3
 fi
 
-# Set up pyenv
-if [[ -x "$(command -v pyenv)" ]]; then
-  eval "$(pyenv init -)"
-fi
-
-# Set up rbenv
-if [[ -x "$(command -v rbenv)" ]]; then
-  eval "$(rbenv init -)"
-fi
-
 # Set up zoxide
 if [[ -x "$(command -v zoxide)" ]]; then
   eval "$(zoxide init zsh)"

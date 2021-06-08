@@ -26,6 +26,16 @@ if [[ -z "${DOTFILES_PATH:-}" ]]; then
     export PATH="$PKENV_ROOT/bin:$PATH"
     export PATH="$PYENV_ROOT/bin:$PATH"
 
+    # Set up rbenv
+    if [[ -x "$(command -v rbenv)" ]]; then
+        eval "$(rbenv init -)"
+    fi
+
+    # Set up pyenv
+    if [[ -x "$(command -v pyenv)" ]]; then
+        eval "$(pyenv init --path)"
+    fi
+
     # Flag to prevent resetting the path in a subshell
     export DOTFILES_PATH=1
 fi
