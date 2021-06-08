@@ -27,7 +27,8 @@ lint:
         flake8-import-order \
         mypy \
         pep8-naming \
-        pydocstyle
+        pydocstyle \
+        types-termcolor
     - pip check
     - ~/.local/bin/flake8 --statistics install.py
     - ~/.local/bin/mypy --strict install.py
