@@ -9,22 +9,38 @@ export GOPATH="$HOME/go"
 # this will make sure we do not clobber the virtual env path
 if [[ -z "${DOTFILES_PATH:-}" ]]; then
     # Prefer python bins over system
-    export PATH="$HOME/.local/bin:$PATH"
+    if [[ -d "$HOME/.local/bin" ]]; then
+        export PATH="$HOME/.local/bin:$PATH"
+    fi
 
     # Prefer go bins over python
-    export PATH="$GOPATH/bin:$PATH"
+    if [[ -d "$GOPATH/bin" ]]; then
+        export PATH="$GOPATH/bin:$PATH"
+    fi
 
     # Prefer rust bins over go
-    export PATH="$HOME/.cargo/bin:$PATH"
+    if [[ -d "$HOME/.cargo/bin" ]]; then
+        export PATH="$HOME/.cargo/bin:$PATH"
+    fi
 
     # Prefer user bins over system
-    export PATH="$HOME/bin:$PATH"
+    if [[ -d "$HOME/bin" ]]; then
+        export PATH="$HOME/bin:$PATH"
+    fi
 
     # Prefer virtual envs over user bins
-    export PATH="$RBENV_ROOT/bin:$PATH"
-    export PATH="$TFENV_ROOT/bin:$PATH"
-    export PATH="$PKENV_ROOT/bin:$PATH"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    if [[ -d "$RBENV_ROOT/bin" ]]; then
+        export PATH="$RBENV_ROOT/bin:$PATH"
+    fi
+    if [[ -d "$TFENV_ROOT/bin" ]]; then
+        export PATH="$TFENV_ROOT/bin:$PATH"
+    fi
+    if [[ -d "$PKENV_ROOT/bin" ]]; then
+        export PATH="$PKENV_ROOT/bin:$PATH"
+    fi
+    if [[ -d "$PYENV_ROOT/bin" ]]; then
+        export PATH="$PYENV_ROOT/bin:$PATH"
+    fi
 
     # Set up rbenv
     if [[ -x "$(command -v rbenv)" ]]; then
